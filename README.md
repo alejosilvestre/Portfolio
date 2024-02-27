@@ -12,7 +12,8 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 En este proyecto, abordé los desafíos comunes de la limpieza y preparación de datos, incluyendo la detección y manejo de valores atípicos, valores faltantes y datos duplicados. Demostré mi habilidad para crear conjuntos de datos limpios y listos para el análisis posterior.
 
 
-### Machine Learning
+### Machine Learning [machine_learning_classification/]
+this is a test
 Aquí encontrarás proyectos donde he aplicado técnicas de aprendizaje automático supervisado y no supervisado para resolver problemas del mundo real. Desde la clasificación hasta la regresión, estos proyectos muestran mi capacidad para construir y evaluar modelos predictivos precisos.
 
 ### Time Series Analysis
