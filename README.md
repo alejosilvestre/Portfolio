@@ -2,7 +2,7 @@
 
 
 
-¡Bienvenido a mi portfolio de Data Scientist en GitHub! Aquí encontrarás una colección de proyectos en los que he trabajado, que abarcan una variedad de áreas en el campo de la ciencia de datos. Desde la limpieza y preparación de datos hasta el desarrollo de modelos avanzados de aprendizaje automático y deep learning, estos proyectos muestran mi experiencia y habilidades en la extracción de información valiosa de conjuntos de datos complejos.
+Bienvenido a mi portfolio ! Aquí encontrarás una colección de proyectos en los que he trabajado, donde podrás comprobar mis habilidades como Data Scientist!
 
 Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejandro-sanchez-silvestre/)
 
