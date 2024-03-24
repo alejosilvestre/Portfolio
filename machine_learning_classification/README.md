@@ -33,8 +33,3 @@ Explica cómo evaluaste los modelos y qué métricas utilizaste. Presenta los re
 - Limitaciones del estudio.
 - Sugerencias para futuras investigaciones o mejoras en el modelo.
 
-## Cómo Contribuir
-Instrucciones para aquellos que deseen contribuir al proyecto.
-
-## Licencia
-Detalles de la licencia del proyecto, si aplica.
