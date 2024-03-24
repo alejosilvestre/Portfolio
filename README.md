@@ -12,8 +12,8 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 En este proyecto, abordé los desafíos comunes de la limpieza y preparación de datos, incluyendo la detección y manejo de valores atípicos, valores faltantes y datos duplicados. Demostré mi habilidad para crear conjuntos de datos limpios y listos para el análisis posterior.
 
 
-### [Machine Learning](machine_learning_classification/)
-Aquí encontrarás proyectos donde he aplicado técnicas de aprendizaje automático supervisado y no supervisado para resolver problemas del mundo real. Desde la clasificación hasta la regresión, estos proyectos muestran mi capacidad para construir y evaluar modelos predictivos precisos.
+### [Machine Learning - Classification](machine_learning_classification/)
+Aqui podrás ver el proyecto que con diferencia me ha llevado más tiempo resolver. Se trata de un modelo que prediga si un determinado ordenador está infectado por virus. Es una antigua competicion de kaggle adaptada.
 
 ### [Time Series Analysis](time_series/)
 En este conjunto de proyectos, exploré datos temporales y desarrollé modelos para predecir tendencias y patrones en series temporales. Mostraré cómo he utilizado técnicas avanzadas de análisis de series temporales para obtener información valiosa de datos secuenciales.
