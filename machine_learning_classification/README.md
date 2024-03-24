@@ -1,9 +1,9 @@
-# Malware Prediction Classificator
+# Malware Prediction Classificator (wip)
 
 ## Descripción del Problema
-Breve descripción del problema que estás intentando resolver con machine learning. Explica el contexto y por qué es relevante o interesante.
+El dataset consiste en 500.000 observaciones de distintas variables (84) referentes a ordenadores. La columna target es 'HasDetections', y esto significa si está infectado por virus o no. El objetivo será constuir un modelo que consiga predecir el mayor numero de casos de infeccion.
 
-## Objetivo
+## Resumen operaciones y roadmap
 Define claramente qué esperas lograr con este proyecto. ¿Cuál es la pregunta específica que estás intentando responder o qué problema específico estás intentando resolver?
 
 ## Conjunto de Datos
