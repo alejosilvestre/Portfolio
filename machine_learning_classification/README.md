@@ -16,9 +16,18 @@ Disminucion de la dimensionalidad. Eliminamos variables que tienen mucha correla
 
 Una vez aqui procedemos al Encoding de las variables categoricas para posteriormente entrenar el modelo con dichos datos. 
 
+Tiramos un primer modelo para marcar un baseline desde el que mejorar las metricas. Posteriormente evaluamos en paralelo 4 diferentes modelos para elegir los mejores 2 (XGBoost y Logistic Regression). Para el LR hemos escalado los datos al no tratarse de un modelo basado en arboles. De estos dos ultimos extraeremos las variables más importantes para el modelo.
+
+Pasamos a la mejora del modelo seleccionado (XGBoost) e iterativamente vamos añadiendo Cross-Validation y tuneo de hiperparametros con Randomized Search grid eligiendo el mejor de los modelos 
+
+Evaluacion grafica del performance del modelo: curva ROC-AUC
+
+Conclusiones.
 
 
-Define claramente qué esperas lograr con este proyecto. ¿Cuál es la pregunta específica que estás intentando responder o qué problema específico estás intentando resolver?
+
+
+
 
 ## Conjunto de Datos
 Descripción del conjunto de datos utilizado, incluyendo:
