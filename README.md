@@ -15,7 +15,9 @@ Aqui podrás ver el proyecto que con diferencia me ha llevado más tiempo resolv
 ### [Deep Learning](deep_learning/)
 En esta seccion encontraras un modelo clasificador de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
 
-### [Time Series Analysis](time_series/)
+### [Time Series Analysis (Prophet)](time_series/)
+
+### [Time Series Analysis (ARIMA Models)](time_series/)
 En este conjunto de proyectos, exploré datos temporales y desarrollé modelos para predecir tendencias y patrones en series temporales. Mostraré cómo he utilizado técnicas avanzadas de análisis de series temporales para obtener información valiosa de datos secuenciales.
 
 ### [Clustering](clustering/)
