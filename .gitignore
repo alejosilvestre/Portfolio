@@ -3,3 +3,5 @@ machine_learning_classification/df_filtered.csv
 machine_learning_classification/phi_corr_targ.csv
 machine_learning_classification/sample_mmp.csv
 machine_learning_classification/df_filtered_prueva.csv
+deep_learning/cifar10_base_model.h5
+time_series_prophet/sales_data_stores.csv
