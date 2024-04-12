@@ -15,12 +15,14 @@ Aqui podrás ver el proyecto que con diferencia me ha llevado más tiempo resolv
 ### [Deep Learning](deep_learning/)
 En esta seccion encontraras un modelo clasificador de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
 
-### [Time Series Analysis](time_series/)
+### [Time Series Analysis (Prophet)](time_series_prophet/)
+Se trata de la creacion y optimizacion de un modelo de previsión de ventas utilizando Prophet de Meta, centrandose especialmente en el modelaje y optimización del modelo.
+
+### [Time Series Analysis (ARIMA Models)](time_series/)
 En este conjunto de proyectos, exploré datos temporales y desarrollé modelos para predecir tendencias y patrones en series temporales. Mostraré cómo he utilizado técnicas avanzadas de análisis de series temporales para obtener información valiosa de datos secuenciales.
 
 ### [Clustering](clustering/)
 Los proyectos de clustering destacan mi experiencia en segmentación de datos y agrupamiento de observaciones similares. Demostraré cómo he aplicado algoritmos de clustering para descubrir estructuras ocultas y patrones en conjuntos de datos complejos.
-
 
 
 Tecnologías Utilizadas
@@ -34,6 +36,8 @@ Matplotlib
 Seaborn
 Jupyter Notebook
 y más...
-Cada proyecto viene con un README detallado que describe el problema abordado, los datos utilizados, las técnicas aplicadas y los resultados obtenidos. ¡Espero que encuentres estos proyectos interesantes y útiles!
+Cada proyecto viene con un README detallado que describe el problema abordado, los datos utilizados, las técnicas aplicadas y los resultados obtenidos.
 
-Si tienes alguna pregunta o comentario sobre alguno de los proyectos, no dudes en contactarme. ¡Gracias por visitar mi portfolio!
+Contacta conmigo si tienes alguna duda, sugerencia o buscas cooperar en un nuevo proyecto intersante!
+
+Alejandro
