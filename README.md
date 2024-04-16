@@ -1,8 +1,6 @@
 # Portfolio
 
-
-
-Bienvenido a mi portfolio ! Aquí encontrarás una colección de proyectos en los que he trabajado, donde podrás comprobar mis habilidades como Data Scientist!
+Bienvenido a mi portfolio! Estos son los ultimos proyectos en los que he estado trabajando donde podrás ver tanto resultados como metodología de trabajo en los proyectos.
 
 Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejandro-sanchez-silvestre/)
 
@@ -10,10 +8,10 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 ## Proyectos Destacados
 
 ### [Machine Learning - Classification](machine_learning_classification/)
-Aqui podrás ver el proyecto que con diferencia me ha llevado más tiempo resolver. Se trata de un modelo que prediga si un determinado ordenador está infectado por virus. Es una antigua competicion de kaggle adaptada.
+Se trata de un modelo que prediga si un determinado ordenador está infectado por virus. Es una antigua competicion de kaggle adaptada.
 
 ### [Deep Learning](deep_learning/)
-En esta seccion encontraras un modelo clasificador de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
+En esta seccion encontraras un modelo clasificador multiclase de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
 
 ### [Time Series Analysis (Prophet)](time_series_prophet/)
 Se trata de la creacion y optimizacion de un modelo de previsión de ventas utilizando Prophet de Meta, centrandose especialmente en el modelaje y optimización del modelo.
@@ -34,7 +32,7 @@ TensorFlow
 Keras
 Matplotlib
 Seaborn
-Jupyter Notebook
+Prophet
 y más...
 Cada proyecto viene con un README detallado que describe el problema abordado, los datos utilizados, las técnicas aplicadas y los resultados obtenidos.
 
