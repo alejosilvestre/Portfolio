@@ -13,7 +13,7 @@ Se trata de un modelo que prediga si un determinado ordenador está infectado po
 ### [Deep Learning](deep_learning/)
 En esta seccion encontraras un modelo clasificador multiclase de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
 
-### [Time Series Analysis (Prophet)](time_series_prophet/)
+### [Time Series Analysis (Prophet)](time_series_prophet_store/)
 Se trata de la creacion y optimizacion de un modelo de previsión de ventas utilizando Prophet de Meta, centrandose especialmente en el modelaje y optimización del modelo.
 
 ### [Time Series Analysis (ARIMA Models)](time_series/)
