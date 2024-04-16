@@ -5,3 +5,4 @@ machine_learning_classification/sample_mmp.csv
 machine_learning_classification/df_filtered_prueva.csv
 deep_learning/cifar10_base_model.h5
 time_series_prophet/sales_data_stores.csv
+time_series_prophet/daily_calendar_with_events.csv
