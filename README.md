@@ -23,19 +23,6 @@ En este conjunto de proyectos, exploré datos temporales y desarrollé modelos p
 Los proyectos de clustering destacan mi experiencia en segmentación de datos y agrupamiento de observaciones similares. Demostraré cómo he aplicado algoritmos de clustering para descubrir estructuras ocultas y patrones en conjuntos de datos complejos.
 
 
-Tecnologías Utilizadas
-Python
-Pandas
-NumPy
-Scikit-learn
-TensorFlow
-Keras
-Matplotlib
-Seaborn
-Prophet
-y más...
-Cada proyecto viene con un README detallado que describe el problema abordado, los datos utilizados, las técnicas aplicadas y los resultados obtenidos.
-
 Contacta conmigo si tienes alguna duda, sugerencia o buscas cooperar en un nuevo proyecto intersante!
 
 Alejandro
