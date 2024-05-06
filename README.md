@@ -7,10 +7,13 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 
 ## Proyectos Destacados
 
-### [Machine Learning - Classification](machine_learning_classification/)
-Se trata de un modelo que prediga si un determinado ordenador está infectado por virus. Es una antigua competicion de kaggle adaptada.
+### [Classification](machine_learning_classification/)
+Se trata de un modelo clasificador binario que prediga si un determinado ordenador está infectado por virus. Es una antigua competicion de kaggle adaptada.
 
-### [Deep Learning](deep_learning/)
+### [Clustering & Classification](Clustering_Classification_Obesity_Risk_prediction/)
+Proyecto que trata sobre los datos de obsesidad de distintos paises de LATAM sobre los que hemos hecho un ejercicio de EDA, Clustering y desarrollado un modelo clasificador multiclase.
+
+### [Deep Learning - CNN](deep_learning/)
 En esta seccion encontraras un modelo clasificador multiclase de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
 
 ### [Time Series Analysis (Prophet)](time_series_prophet_store/)
