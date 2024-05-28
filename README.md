@@ -7,11 +7,16 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 
 ## Proyectos Destacados
 
-### [Classification](machine_learning_classification/)
+### [Classification: Microsoft Malware Prediction](machine_learning_classification/)
 Se trata de un modelo clasificador binario que prediga si un determinado ordenador está infectado por virus. Es una antigua competicion de kaggle adaptada.
 
-### [Clustering & Classification](Clustering_Classification_Obesity_Risk_prediction/)
+### [Clustering & Classification: Obesity Risk Prediction](Clustering_Classification_Obesity_Risk_prediction/)
 Proyecto que trata sobre los datos de obsesidad de distintos paises de LATAM sobre los que hemos hecho un ejercicio de EDA, Clustering y desarrollado un modelo clasificador multiclase.
+
+### [Regression: Car Price Predictor](car_price_prediction_WhiteBox_Datathon/)
+Proyecto elaborado a partir de los datos del Datathon de WhiteBox Mayo 2024. Consiste en datos reales sobre el mercado de coches de segunda mano donde el reto consiste en elaborar un modelo que prediga el precio de un coche acorde con sus caractericticas (marca, modelo, combustible...). 
+
+A destacar: elaboracion de mapas con Folium obteniendo informacion sintetica desde la API de Google Maps y utilizacion de ReGex para completar datos erroneos/feature-engineering.
 
 ### [Deep Learning - CNN](deep_learning/)
 En esta seccion encontraras un modelo clasificador multiclase de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
