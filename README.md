@@ -7,10 +7,10 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 
 ## Proyectos Destacados
 
-### [Classification](machine_learning_classification/)
+### [Classification: Microsoft Malware Prediction](machine_learning_classification/)
 Se trata de un modelo clasificador binario que prediga si un determinado ordenador está infectado por virus. Es una antigua competicion de kaggle adaptada.
 
-### [Clustering & Classification](Clustering_Classification_Obesity_Risk_prediction/)
+### [Clustering & Classification: Obesity Risk Prediction](Clustering_Classification_Obesity_Risk_prediction/)
 Proyecto que trata sobre los datos de obsesidad de distintos paises de LATAM sobre los que hemos hecho un ejercicio de EDA, Clustering y desarrollado un modelo clasificador multiclase.
 
 ### [Regression: Car Price predictor](car_price_prediction_WhiteBox_Datathon/)
