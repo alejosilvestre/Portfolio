@@ -27,6 +27,7 @@ Se trata de un modelo clasificador binario que prediga si un determinado ordenad
 
 ### [Time Series Analysis (Prophet) :chart_with_upwards_trend: :convenience_store:](time_series_prophet_store/)
 Se trata de la creacion y optimizacion de un modelo de previsión de ventas utilizando Prophet de Meta, centrandose especialmente en el modelaje y optimización del modelo.
+- :eye:A destacar: Hiperparametrizacion y ajuste fino del modelo. Inclusion de eventos clave y vacaciones y regresores adicionales.
 
 ### [Time Series Analysis (ARIMA Models) 📉](time_series/)
 En este conjunto de proyectos, exploré datos temporales y desarrollé modelos para predecir tendencias y patrones en series temporales. Mostraré cómo he utilizado técnicas avanzadas de análisis de series temporales para obtener información valiosa de datos secuenciales.
