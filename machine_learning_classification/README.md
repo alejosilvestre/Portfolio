@@ -25,9 +25,9 @@ El dataset consiste en 500.000 observaciones de distintas variables (83) referen
 
 Hemos conseguido mejorar el modelo! Tanto las metricas han mejorado respecto al baseline (Recall:0.6560 vs 0.7055) como el rendimiento visualizado en la curva ROC-AUC (AUC: 0.62 vs 0.65).
 
-![ROC_AUC Curve](roc.png)
+![ROC_AUC Curve](roc.PNG)
 
-![Feature Importance XGBoost](feature_importance.png)
+![Feature Importance XGBoost](feature_importance.PNG)
 
 
 
