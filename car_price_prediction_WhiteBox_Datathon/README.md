@@ -19,7 +19,7 @@ El proyecto está dividido en las siguientes secciones:
    
 7. **Visualizacion:Ingeniería de Características**:Analisis de las variables Numericas(Violin & Boxplot) , Categóricas (Histogramas) , analisis bivariante  y visializacion de la distribucion de los anuncios a nivel geografico
 
-![Mapa con Folium Anuncios](folium_map.png)
+![Mapa con Folium Anuncios](car_price_prediction_WhiteBox_Datathon/folium_map.PNG)
    
 9. **Preprocesamiento**: Eliminacion de Outliers, encoding de variables categoricas y normalizacion (Robust Scaler)
     
