@@ -19,9 +19,8 @@ Proyecto elaborado a partir de los datos del Datathon de WhiteBox Mayo 2024. Con
 - :eye:A destacar:elaboracion de mapas con Folium obteniendo informacion sintetica desde la API de Google Maps y utilizacion de ReGex para completar datos erroneos/feature-engineering.
 
 
-This project implements a multi-label image classification system for medical images using a DenseNet121 architecture, pre-trained on ImageNet. The goal is to classify different medical conditions based on X-ray images, leveraging transfer learning techniques.
 
-### [Deep Learning - Medical Image Classificator:brain: :eyeglasses:](Deep_learning_Medical_image_Classificator/)
+### [Deep Learning - Medical Image Classificator :brain: :eyeglasses:](Deep_learning_Medical_image_Classificator/)
 Creacion de un modelo de clasificacion de imagen medica multietiqueta (14 clases distintas). Utilizacion de Transfer learning para implementar arquitectura de DenseNet121.
 - :eye:A destacar: el tamaño de los datos (40Gb) y la implementación de Grad-CAM para la interpretacion de las predicciones del modelo.
 
