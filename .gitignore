@@ -7,3 +7,4 @@ deep_learning/cifar10_base_model.h5
 time_series_prophet/sales_data_stores.csv
 time_series_prophet/daily_calendar_with_events.csv
 *.csv
+Deep_Learning_CIPHAR10/cifar10_base_model.h5
