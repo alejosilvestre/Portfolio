@@ -18,7 +18,8 @@ religiosos ( hannukah, diwali o ramadan) e incluso deportivos/diversos( marathon
 **4. Optimizacion**: Inclusion de regresores, vacaciones nacionales y eventos seleccionados. Ajuste de hiperparametros con Optuna y cross-validation
     
 **5. Resultados**: Tras el ajuste del modelo conseguimos que las predicciones se ajusten mas a la realidad consiguiendo capturar los maximos y minimos mejor.
-![Prophet Models before & after fine tuning](prophet.PNG)
+
+![Prophet Models before & after fine tuning](prophet.png)
 
 **6. Aplicación práctica:**: Optimizacion del stock por tienda. 
 
