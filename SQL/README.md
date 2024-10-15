@@ -10,8 +10,8 @@ checking everything is displaying okey.
 
 Finaly a SQL query is executed to obtain the ARR in € per user_id.
 
-Here below a screenshot of the SQL code process
 
+## SQL Code in MySQL Workbench
 
 ![1](1.PNG)
 ![2](2.PNG)
