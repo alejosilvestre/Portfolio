@@ -1,6 +1,6 @@
 # Power BI Dashboard - Subscriptions company based
 
-This projects is related with the SQL project in this Repo. The dashboard aim is to caputure the main KPIs of the business of a certain company. 
+This projects is related with the [SQL project](https://github.com/alejosilvestre/Portfolio/tree/master/SQL) in this Repo. The dashboard aim is to caputure the main KPIs of the business of a certain company. 
 It's global business is based on a subscription and renewal scheme offering diverse products worldwide.
 
 The data provided and the records go from start of 2022 until end of February 2022 (22/2/2022). 
