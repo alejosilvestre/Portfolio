@@ -28,4 +28,4 @@ Finaly a SQL query is executed to obtain the ARR in € per user_id.
 
 And the result of the query:
 
-![RESULTADO_SQL](RESULTADO_SQL.PNG)
+![RESULTADO SQL](RESULTADO SQL.PNG)
