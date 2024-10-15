@@ -7,6 +7,8 @@ The data provided and the records go from start of 2022 until end of February 20
 The assumption is that the analysis took place from that date onwards. After that date it's understood no new subscriptions nor renewals are made.
 Data Exploration and Cleanning were made in a Python Notebook before uploading the data(.csv) into the three tables in PowerBI (Users, Subscriptions, Subscriptions_renewals)
 
+You can download the [Dashboard](https://github.com/alejosilvestre/Portfolio/blob/master/PowerBI_dashboard/Dashboard.pbix) here!
+
 ## Dashboard Structure
 
 ### Summary
