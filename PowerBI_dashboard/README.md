@@ -1,4 +1,4 @@
-# Power BI Dashboad - Subscriptions company based
+# Power BI Dashboard - Subscriptions company based
 
 This projects is related with the SQL project in this Repo. The dashboard aim is to caputure the main KPIs of the business of a certain company. 
 It's global business is based on a subscription and renewal scheme offering diverse products worldwide.
