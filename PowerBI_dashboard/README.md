@@ -9,14 +9,18 @@ Data Exploration and Cleanning were made in a Python Notebook before uploading t
 
 ## Dashboard Structure
 
-### Summary: The aim of this sheet is to give a global picture of Iubenda's global business capturing some KPIs and business info of historical data. 
+### Summary
+The aim of this sheet is to give a global picture of global business capturing some KPIs and business info of historical data. 
 
-[Summary](summary.PNG)
+![Summary](summary.PNG)
 
-### Actual: Focus on the previous year(2022) and the present months of early 2023.
+### Actual
+Focus on the previous year(2022) and the present months of early 2023. We can analyse more in detail, products and customers
 
-[Actual](actual.PNG)
+![Actual](actual.PNG)
 
-### Forecast: impact of the future risks/opportunities of renewals of the ending subscriptions from prensent-onwards (until February 2024).
+### Forecast
 
-[Forecast](forecast.PNG)
+Impact of the future risks/opportunities of renewals of the ending subscriptions from prensent-onwards (until February 2024).
+
+![Forecast](forecast.PNG)
