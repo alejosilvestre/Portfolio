@@ -8,13 +8,12 @@ Here below the metadata for the rational of everycolumn and the links between th
 ![metadata](metadata.PNG)
 
 
+## Outline of script:
 
 From the database three tables (users, subscriptions and subscriptions_renewals) are created. Afterwards the information is loaded from CSV files
 checking everything is displaying okey.
 
 Finaly a SQL query is executed to obtain the ARR in € per user_id.
-
-
 
 
 ## SQL Code in MySQL Workbench
@@ -28,4 +27,4 @@ Finaly a SQL query is executed to obtain the ARR in € per user_id.
 
 And the result of the query:
 
-![RESULTADO SQL](RESULTADO SQL.PNG)
+![RESULTADO_SQL](RESULTADO_SQL.PNG)
