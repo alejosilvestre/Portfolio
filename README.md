@@ -2,9 +2,12 @@
 
 Bienvenido a mi portfolio! Estos son los ultimos proyectos en los que he estado trabajando donde podrás ver tanto resultados como mi metodología de trabajo en los proyectos.
 
-Los proyectos se centran en **Machine Learning** :robot: y **Deep Learning**:brain:, resolviendo diversos problemas de **clasificacion** (binaria y multiclase), **regresión** (serie temporal y regresion logistica), **clustering** y **computer vision**. Dependiendo de cada proyecto le dedico mas o menos tiempo a un **análisis de datos** profundo 📊.
-
-También podreis ver mis aptitudes en PowerBI y SQL
+Estan estructurados en tres grandes ramas:
+- **Machine Learning**: Clasificación, Regresión y Clustering.
+- **Deep Learning**: Computer Vision
+- **GenAI**: RAG y Prompt Engineering
+  
+Dependiendo de cada proyecto le dedico mas o menos tiempo a un **análisis de datos** profundo 📊.
 
 Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejandro-sanchez-silvestre/)
 
@@ -44,17 +47,11 @@ En esta seccion encontraras un modelo clasificador multiclase de imagenes basado
 
 ## **Gen AI**:brain:
 
-### [RAG Chatbot :brain: :eyeglasses:](RAG_Chatbot/)
-Creacion de un modelo de clasificacion de imagen medica multietiqueta (14 clases distintas). Utilizacion de Transfer learning para implementar arquitectura de DenseNet121.
-- :eye:A destacar: el tamaño de los datos (40Gb) y la implementación de Grad-CAM para la interpretacion de las predicciones del modelo.
+### [RAG Medical Chatbot :brain: :eyeglasses:](RAG_Chatbot/)
+Creacion de un chatbot capaz de buscar informacion médica técnica dentro de 2500 paginas de libros de texto medicos. Mediante el uso de un RAG, aumento la precisión y la robustez de las respuestas dadas por un LLM (Mistral 7B).
+- :eye:A destacar: La conclusión, te encantará.
 
 
-
-## PowerBI & SQL 📊
-Estos dos proyectos se ha utilizado unos datos sobre una compañia donde su negocio base son las subscripciones, extrayendo y limpando los datos desde un archivo xlms a 3 archivos distintos (tablas) formato csv. 
-Posteriormente estos csv son cargados a PowerBI y MySQL
-### [Power BI Dashboard](PowerBI_dashboard/)
-### [SQL](SQL/)
 
 
 Contacta conmigo si tienes alguna duda, sugerencia o buscas cooperar en un nuevo proyecto intersante!
