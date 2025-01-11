@@ -42,6 +42,14 @@ Creacion de un modelo de clasificacion de imagen medica multietiqueta (14 clases
 En esta seccion encontraras un modelo clasificador multiclase de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
 
 
+## **Gen AI**:brain:
+
+### [RAG Chatbot :brain: :eyeglasses:](RAG_Chatbot/)
+Creacion de un modelo de clasificacion de imagen medica multietiqueta (14 clases distintas). Utilizacion de Transfer learning para implementar arquitectura de DenseNet121.
+- :eye:A destacar: el tamaño de los datos (40Gb) y la implementación de Grad-CAM para la interpretacion de las predicciones del modelo.
+
+
+
 ## PowerBI & SQL 📊
 Estos dos proyectos se ha utilizado unos datos sobre una compañia donde su negocio base son las subscripciones, extrayendo y limpando los datos desde un archivo xlms a 3 archivos distintos (tablas) formato csv. 
 Posteriormente estos csv son cargados a PowerBI y MySQL
