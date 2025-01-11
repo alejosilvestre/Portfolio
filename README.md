@@ -39,9 +39,9 @@ Creacion de un modelo de clasificacion de imagen medica multietiqueta (14 clases
 - :eye:A destacar: el tamaño de los datos (40Gb) y la implementación de Grad-CAM para la interpretacion de las predicciones del modelo.
 
 
-## **Gen AI**:brain:
+## **Gen AI**:genie:
 
-### [RAG Medical Chatbot :brain: :eyeglasses:](RAG_Chatbot/)
+### [RAG Medical Chatbot :genie: :medical_symbol: ](RAG_Chatbot/)
 Creacion de un chatbot capaz de buscar informacion médica técnica dentro de 2500 paginas de libros de texto medicos. Mediante el uso de un RAG, aumento la precisión y la robustez de las respuestas dadas por un LLM (Mistral 7B).
 - :eye:A destacar: La conclusión, te encantará.
 
