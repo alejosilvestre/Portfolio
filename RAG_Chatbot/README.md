@@ -1,6 +1,6 @@
 # **Biomedical RAG Chatbot - GenAI**
 
-![genai_chat](genai_chat.PNG)
+![genai_chat](images/genai_chat.PNG)
 
 I've build this RAG chatbot to provide support to a LLM with an especific acurate context out of the training of the LLM in order the model to be able to answer new specialized questions about a certain topic.
 
