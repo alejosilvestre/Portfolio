@@ -31,18 +31,12 @@ Se trata de un modelo clasificador binario que prediga si un determinado ordenad
 Se trata de la creacion y optimizacion de un modelo de previsión de ventas utilizando Prophet de Meta, centrandose especialmente en el modelaje y optimización del modelo.
 - :eye:A destacar: Hiperparametrizacion y ajuste fino del modelo. Inclusion de eventos clave y vacaciones y regresores adicionales.
 
-### [Time Series Analysis (ARIMA Models) 📉](time_series/)
-En este conjunto de proyectos, exploré datos temporales y desarrollé modelos para predecir tendencias y patrones en series temporales. Mostraré cómo he utilizado técnicas avanzadas de análisis de series temporales para obtener información valiosa de datos secuenciales.
-
 
 ## **Deep Learning**:brain:
 
 ### [Deep Learning - Medical Image Classificator :brain: :eyeglasses:](Deep_learning_Medical_image_Classificator/)
 Creacion de un modelo de clasificacion de imagen medica multietiqueta (14 clases distintas). Utilizacion de Transfer learning para implementar arquitectura de DenseNet121.
 - :eye:A destacar: el tamaño de los datos (40Gb) y la implementación de Grad-CAM para la interpretacion de las predicciones del modelo.
-
-### [Deep Learning - CNN on Ciphar_10 :brain: :eyeglasses:](Deep_Learning_CIPHAR10/)
-En esta seccion encontraras un modelo clasificador multiclase de imagenes basado en redes neuronales. Utilizando redes convolucionales (CNN) podremos dar solucion al reto propuesto de keras, ciphar10. 
 
 
 ## **Gen AI**:brain:
