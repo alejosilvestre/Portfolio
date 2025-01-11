@@ -32,7 +32,7 @@ The aim of creating this project was to create a specialized RAG Chatbot overcom
 
 **4. Embeddings generation using Specialized Biomedical Domain Model**: Used SPubMedBert, Bert version trained specifically on PubMed Abstracts to gain the domain specific knowledge.
 
-![pubmedbert](images/pubmedbert.PNG)
+![pubmedbert](images/pubmedbert.png)
 
 **5. RAG construction**: Used Chroma as vector-database to store all chunks embeddings.
 
@@ -48,7 +48,9 @@ The aim of creating this project was to create a specialized RAG Chatbot overcom
 
 **9. Conclusion**: Based on the executed lines the **LLM(Mistral 7B)** without the implementation of the RAG technique is not able to answer correclty the question about **US Presidential elections** as we expected but when associated with the RAG, it provide the precise and accurate answer desired proving thad the RAG is working well.
 
+
 ![BASE_vs_RAG](images/BASE_vs_RAG.PNG)
+
 
 Regarding the medical output is yet to be determined if this is providing the correct and precise healthcare answer always, but it can search information precisely and support its response with that ''evidence'' which I believe is a much more robust answer than solely the LLM output (very imprecise and general.).
 
@@ -61,36 +63,5 @@ And as in the fairy tales, this story ends. **And they lived happily ever after.
 Thanks for watching!
 
 
-
-
-
-
-
-The notebook is divided in the following sections:
-
-**Intro**: Brieg description of the data and challenges.
-   
-0. **Libraries**: Instalation of the needed libraries to run the notebook.
-   
-1. **Train / Test Split**: split the data in train, validation and test following an unique patient list. Test patients must not be present in Train split in order to avoid data leakage.
-   
-   
-2. **Loading the data**: Use of ImageDataGenerators to load, preprocess and data augment the images into the model. Dealing with class imbalance using custom weight function loss.
-
-   
-3. **Model Built-up & Training**: Importation of DenseNet121 architecture and trainning.
-    
-4. **Prediction and evaluationModelado**: XGBoost Regressor y posterior optimizacion de hiperparametros con Optuna.
-
-![Metrics](metrics.PNG)
-![Class_probabilities](Class_probabilities.PNG)
-
-5. **Grad-CAM implementation**: it allows us to increase the model explainability.
-![GRADCAM](gradcam.PNG)
----
-
-
-## **Results**  
-Great avg AUC performance over 0.83 in validation. Good metrics in recall but poor in precision.
 
 
