@@ -12,7 +12,7 @@ Three books has been processed and loaded to feed the RAG system.
 
 - **Toxicology:** Principes of Toxicology Stine & Brown, 3rd Edition(2015)
 
-![Books](books.PNG)
+![Books](images/books.PNG)
 
 **In total more than 2500 pages of an especific field information.**
 
@@ -32,11 +32,11 @@ The aim of creating this project was to create a specialized RAG Chatbot overcom
 
 **4. Embeddings generation using Specialized Biomedical Domain Model**: Used SPubMedBert, Bert version trained specifically on PubMed Abstracts to gain the domain specific knowledge.
 
-![pubmedbert](pubmedbert.PNG)
+![pubmedbert](images/pubmedbert.PNG)
 
 **5. RAG construction**: Used Chroma as vector-database to store all chunks embeddings.
 
-![rag_pipeline](rag_pipeline.PNG)
+![rag_pipeline](images/rag_pipeline.PNG)
 
 
 **6. Building the LLM for generating the answer**: one of the latest state-of-the-art general purpose models, Mistral 7B, for the generation of the output. Training of this model was made until Sept 2023 so I do not expect it to know current information.
@@ -48,7 +48,7 @@ The aim of creating this project was to create a specialized RAG Chatbot overcom
 
 **9. Conclusion**: Based on the executed lines the **LLM(Mistral 7B)** without the implementation of the RAG technique is not able to answer correclty the question about **US Presidential elections** as we expected but when associated with the RAG, it provide the precise and accurate answer desired proving thad the RAG is working well.
 
-![BASE_vs_RAG](BASE_vs_RAG.PNG)
+![BASE_vs_RAG](images/BASE_vs_RAG.PNG)
 
 Regarding the medical output is yet to be determined if this is providing the correct and precise healthcare answer always, but it can search information precisely and support its response with that ''evidence'' which I believe is a much more robust answer than solely the LLM output (very imprecise and general.).
 
@@ -56,7 +56,7 @@ The **RAG-chain** created is able to provide **dosing and forms of application**
 
 And as in the fairy tales, this story ends. **And they lived happily ever after.**
 
-![wedding](wedding.jpg)
+![wedding](images/wedding.jpg)
 
 Thanks for watching!
 
