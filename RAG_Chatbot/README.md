@@ -43,6 +43,8 @@ The aim of creating this project was to create a specialized RAG Chatbot overcom
 
 **7. Testing**: Generated novel information(US-Presidential elections info, Nov 24) out-of-scope of the LLM model to test the ability to answer question it truly doesn't know. Tested with a medical specific domain question to see the precision in the response.
 
+![testing](images/testing.PNG)
+
 
 **8. Building the RAG-Chain & Prompt Engineering**: Built a prompt to instruct the LLM througth the Chain to create a certain style of output.
 
