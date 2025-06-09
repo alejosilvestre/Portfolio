@@ -20,9 +20,9 @@ The notebook is divided in the following sections:
 2. **Loading the data**: Use of ImageDataGenerators to load, preprocess and data augment the images into the model. Dealing with class imbalance using custom weight function loss.
 
    
-3. **Model Built-up & Training**: Importation of DenseNet121 architecture and trainning.
+3. **Model Built-up & Training**: Importation of DenseNet121 architecture and trainning (fine-tunning of last model layers).
     
-4. **Prediction and evaluationModelado**: XGBoost Regressor y posterior optimizacion de hiperparametros con Optuna.
+4. **Prediction and evaluation**: 
 
 ![Metrics](metrics.PNG)
 ![Class_probabilities](Class_probabilities.PNG)
