@@ -1,4 +1,9 @@
 import json
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
+
+import agente1
 
 
 def load_restaurants(file_path):
@@ -22,5 +27,8 @@ def load_restaurants(file_path):
 
 if __name__ == "__main__":
     restaurants = load_restaurants("restaurants.json")
-    for restaurant in restaurants:
-        print(restaurant)
+
+    user_request = "Consígueme una reserva para las 9 en un restaurante mexicano en Madrid con buena puntuación"
+
+    # Llamamos a la función `main` exportada por el módulo
+    agente1.choose_restaurant(restaurants, user_request)
