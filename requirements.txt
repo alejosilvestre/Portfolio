@@ -1,0 +1,4 @@
+json
+dotenv
+openai
+langchain
