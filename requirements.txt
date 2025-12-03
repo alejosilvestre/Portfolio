@@ -1,0 +1,14 @@
+json
+dotenv
+openai
+langchain
+
+
+
+# Alejandro Python 3.11.0
+pandas
+fastapi
+uvicorn
+joblib
+pydantic
+streamlit

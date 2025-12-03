@@ -1,0 +1,537 @@
+{
+  "search_metadata": {
+    "id": "692c870cd3fb85aed94bee21",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/f31938f14a871e52/692c870cd3fb85aed94bee21.json",
+    "created_at": "2025-11-30 18:03:56 UTC",
+    "processed_at": "2025-11-30 18:03:56 UTC",
+    "google_local_url": "https://www.google.es/search?q=RESTAURANTES&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4&hl=es&gl=es&tbm=lcl",
+    "raw_html_file": "https://serpapi.com/searches/f31938f14a871e52/692c870cd3fb85aed94bee21.html",
+    "total_time_taken": 2.4
+  },
+  "search_parameters": {
+    "engine": "google_local",
+    "q": "RESTAURANTES",
+    "location_requested": "Madrid, Community of Madrid, Spain",
+    "location_used": "Madrid,Community of Madrid,Spain",
+    "google_domain": "google.es",
+    "hl": "es",
+    "gl": "es",
+    "device": "desktop"
+  },
+  "local_results": [
+    {
+      "position": 1,
+      "rating": 4.7,
+      "reviews": 22000,
+      "reviews_original": "(22 mil)",
+      "price": "20-40 €",
+      "description": "\"Excelente lugar, súper original, comida y cocktails riquísimos.\"",
+      "lsig": "AB86z5Vbpm4CJbAg5n_tVkeoHIPg",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8d76d2c196d64f8a12094b1f4f55bb73b7700dacb50be29f8.jpeg",
+      "place_id": "7112650868937611535",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=7112650868937611535&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.415802,
+        "longitude": -3.7029836
+      },
+      "title": "Rosi La Loca",
+      "type": "Restaurante",
+      "address": "C. de Cádiz, 4"
+    },
+    {
+      "position": 2,
+      "rating": 4.6,
+      "reviews": 4100,
+      "reviews_original": "(4,1 mil)",
+      "price": "20-30 €",
+      "description": "\"El steak tartar de solomillo espectacular .\"",
+      "lsig": "AB86z5X9-UjyqTI0kevM0bvruE3b",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d80a03b3b7e02fca8e95e5157c8d325b73425a3d3a1ea0d28a.jpeg",
+      "place_id": "15369570528673348431",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=15369570528673348431&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.416107,
+        "longitude": -3.709947
+      },
+      "title": "Restaurante Gloria Bendita Madrid",
+      "type": "Restaurante",
+      "address": "Calle de Santiago, 3"
+    },
+    {
+      "position": 3,
+      "rating": 4.6,
+      "reviews": 31000,
+      "reviews_original": "(31 mil)",
+      "price": "10-20 €",
+      "description": "\"Excelente lugar, la comida es exquisita, la atención está al mismo nivel.\"",
+      "lsig": "AB86z5UANyG_o-d3jPBd5jmFWg2k",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8b59c37b6690dc234208da1f9c37b14e7d33e4119b039f7ad.jpeg",
+      "place_id": "15000621827562042711",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=15000621827562042711&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.419636,
+        "longitude": -3.7019527
+      },
+      "title": "Tapa Tapa Montera",
+      "type": "Tapas",
+      "address": "C. de la Montera, 47"
+    },
+    {
+      "position": 4,
+      "rating": 4.8,
+      "reviews": 3900,
+      "reviews_original": "(3,9 mil)",
+      "price": "20-30 €",
+      "description": "\"Bonito lugar con comida exquisita y atención espectacular.\"",
+      "lsig": "AB86z5UzUPeVS38Zf9Zkqq0F76Be",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8463f5f2b92d6a60ac5f29c3dbdb3af4d65dfa484dc2f6280.jpeg",
+      "place_id": "528636930778283272",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=528636930778283272&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.416473,
+        "longitude": -3.6991673
+      },
+      "title": "Primo Restaurante Taquería",
+      "type": "Mexicana",
+      "address": "Cra de S. Jerónimo, 32"
+    },
+    {
+      "position": 5,
+      "rating": 4.7,
+      "reviews": 19000,
+      "reviews_original": "(19 mil)",
+      "price": "€",
+      "description": "\"Trato excelente, ambientación acogedora, y comida espectacular.\"",
+      "lsig": "AB86z5X_I34zY7ro71waggq9cmgn",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d841673b9a7eea2fc37b5e312b8fe0871be565bd28aeb611b9.jpeg",
+      "place_id": "5481266792486401370",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=5481266792486401370&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.415062,
+        "longitude": -3.7019136
+      },
+      "title": "Inclan Brutal Bar I Restaurante temático Madrid",
+      "type": "Restaurante",
+      "address": "C. de Álvarez Gato, 4"
+    },
+    {
+      "position": 6,
+      "rating": 4.3,
+      "reviews": 5200,
+      "reviews_original": "(5,2 mil)",
+      "price": "10-20 €",
+      "description": "\"Sabroso, auténtico, buen ambiente, y servicio excelente.\"",
+      "lsig": "AB86z5Vg15Nv7KO5SbeuXU7JNfwL",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d84f6a39afd3cbc0cd7400fae5b9009807ce61d7119ae68cf2.png",
+      "place_id": "6466483471176527389",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=6466483471176527389&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.415096,
+        "longitude": -3.7013805
+      },
+      "title": "Taberna La Fragua de Vulcano",
+      "type": "Española",
+      "address": "C. de Álvarez Gato, 9"
+    },
+    {
+      "position": 7,
+      "rating": 4.3,
+      "reviews": 10000,
+      "reviews_original": "(10 mil)",
+      "price": "20-30 €",
+      "description": "\"Pedimos risotto de rabo de toro y boletus, y hamburguesa pulled pork.\"",
+      "lsig": "AB86z5UOtLUeH60_VTwrLKkf9y4k",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d80d72b31aceb05b6d8d2a9805447835765f519dce74f8f322.jpeg",
+      "place_id": "6195359906572756411",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=6195359906572756411&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.419018,
+        "longitude": -3.7028458
+      },
+      "title": "Lamucca del Carmen",
+      "type": "Restaurante",
+      "address": "Pl. del Carmen, 5"
+    },
+    {
+      "position": 8,
+      "rating": 4.5,
+      "reviews": 18000,
+      "reviews_original": "(18 mil)",
+      "price": "1-10 €",
+      "description": "\"Excelente atencion y deliciosa comida, muy accesible y recomendado\"",
+      "lsig": "AB86z5UGGkZvjXc5WBdpRUY1adjy",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8862654942aaa7d180c434252b9a6c1d2ebeec23f1e8b348d.jpeg",
+      "place_id": "14844424724010047350",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=14844424724010047350&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.414913,
+        "longitude": -3.706822
+      },
+      "title": "Cervecería La Campana",
+      "type": "Restaurante",
+      "address": "C. de Botoneras, 6"
+    },
+    {
+      "position": 9,
+      "rating": 4.8,
+      "reviews": 15000,
+      "reviews_original": "(15 mil)",
+      "price": "20-40 €",
+      "description": "\"La comida fantástica pero el ambiente y el trato deja mucho que desear.\"",
+      "lsig": "AB86z5VK-u3zH70xn5ECdh7YpCwn",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8b87b50a462da141de909aeaf5e4c55a1a83b4c570fe4a6ed.jpeg",
+      "place_id": "1319558044211032724",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=1319558044211032724&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.43378,
+        "longitude": -3.6747196
+      },
+      "title": "La Taberna de Peñalver",
+      "type": "Mediterránea",
+      "address": "C. del Conde de Peñalver, 90, 90-92-94"
+    },
+    {
+      "position": 10,
+      "rating": 4.4,
+      "reviews": 15000,
+      "reviews_original": "(15 mil)",
+      "price": "1-10 €",
+      "description": "\"El local con muy buen ambiente y la comida espectacular.\"",
+      "lsig": "AB86z5VTQVhjekfOLY0HA91OnYXA",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8cd12f06763d7464746a4bcf93cde13019be6191b88ec98bb.png",
+      "place_id": "17281916736630592849",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=17281916736630592849&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.41717,
+        "longitude": -3.704593
+      },
+      "title": "Casa Labra",
+      "type": "Taberna",
+      "address": "C. de Tetuán, 12"
+    },
+    {
+      "position": 11,
+      "rating": 4.8,
+      "reviews": 5600,
+      "reviews_original": "(5,6 mil)",
+      "price": "20-30 €",
+      "description": "\"phenomenal food - great quality meat and a chimichurri sauce to die for.\"",
+      "lsig": "AB86z5UIoIxqyGuOEQUbJ6aBMRUd",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8eb0160687bc4e9d61b3281d1d4091941ae79345ec9a62d8a.jpeg",
+      "place_id": "3244556558929883778",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=3244556558929883778&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.41632,
+        "longitude": -3.7003236
+      },
+      "title": "Pampa Beef Parrilla Argentina",
+      "type": "Argentina",
+      "address": "C. del Príncipe, 3"
+    },
+    {
+      "position": 12,
+      "rating": 4.5,
+      "reviews": 9200,
+      "reviews_original": "(9,2 mil)",
+      "price": "10-20 €",
+      "description": "\"Excelente las tapas ricas todo los ingredientes frescos .\"",
+      "lsig": "AB86z5VoGl7rcYaCxuX4hiYVmQ12",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8db5b8ca761a035788f2d7d4a86415da468bc336a6f2bab68.jpeg",
+      "place_id": "4233981620834364096",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=4233981620834364096&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.414925,
+        "longitude": -3.7012136
+      },
+      "title": "Tapa Tapa Santa Ana",
+      "type": "Restaurante",
+      "address": "Pl. de Sta. Ana, 1"
+    },
+    {
+      "position": 13,
+      "rating": 4.4,
+      "reviews": 3600,
+      "reviews_original": "(3,6 mil)",
+      "price": "20-30 €",
+      "description": "\"Excelente comida , ambiente espectacular y atención de lujo\"",
+      "lsig": "AB86z5W1H6nUyGrqGFnGEG_OvV6U",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d80bf3679105a7e8e71c80512d6e247ae6ad0500bb0a6e86c0.jpeg",
+      "place_id": "6348186386375858237",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=6348186386375858237&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.415646,
+        "longitude": -3.7026768
+      },
+      "title": "En Busca del Tiempo",
+      "type": "Cocina vasca",
+      "address": "C. de Barcelona, 4"
+    },
+    {
+      "position": 14,
+      "rating": 4.6,
+      "reviews": 2400,
+      "reviews_original": "(2,4 mil)",
+      "price": "20-30 €",
+      "description": "\"Todo estaba muy bueno, pero la burrata con salsa pesto es espectacular.\"",
+      "lsig": "AB86z5XGuyCPRJo-t2ljYmjvWgOx",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d88ab1b75ac4de306ee727d4ad63913df5c87b60f33c02d998.jpeg",
+      "place_id": "14172645204839776999",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=14172645204839776999&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.41321,
+        "longitude": -3.69658
+      },
+      "title": "Restaurante Lola Sí Mola",
+      "type": "Restaurante",
+      "address": "C. de las Huertas, 55"
+    },
+    {
+      "position": 15,
+      "rating": 4.7,
+      "reviews": 1300,
+      "reviews_original": "(1,3 mil)",
+      "price": "20-30 €",
+      "description": "\"Nachos muy buenos, baos, tacos, salmorejo...\"",
+      "lsig": "AB86z5VhweKsahxImVuHZ0XQubFz",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8b5c1fe0f6caae8aee469e7e795220aaab605c8258a7d0aae.jpeg",
+      "place_id": "10174735902416098282",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=10174735902416098282&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.41534,
+        "longitude": -3.7026336
+      },
+      "title": "Lynch - Food and Cocktails",
+      "type": "Restaurante",
+      "address": "C. de Barcelona, 12"
+    },
+    {
+      "position": 16,
+      "rating": 4.4,
+      "reviews": 1700,
+      "reviews_original": "(1,7 mil)",
+      "price": "€€",
+      "description": "\"La comida estaba espectacular, quizá la ensalada un poco escasa.\"",
+      "lsig": "AB86z5W-Lx5IYPhydAsUNYf6MWyX",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8b99851018f6d9a2cbe2acb9aecd5a5debe694fdca59c5aad.jpeg",
+      "place_id": "14890746034845404562",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=14890746034845404562&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.41587,
+        "longitude": -3.697692
+      },
+      "title": "El RINCÓN DE ESTEBAN",
+      "type": "Restaurante",
+      "address": "Calle de Sta. Catalina, 3"
+    },
+    {
+      "position": 17,
+      "rating": 4.5,
+      "reviews": 2900,
+      "reviews_original": "(2,9 mil)",
+      "price": "20-30 €",
+      "description": "\"Muy recomendable, tacos de atún superior, lo mejor el servicio Pablo pujol\"",
+      "lsig": "AB86z5UbsGI51FaI9B_WmlHku3Fl",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8b1cd88ae7f3d8a8a9ffd103fce0d3b943ea1816cd1b5e381.jpeg",
+      "place_id": "14632288868637688741",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=14632288868637688741&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.41497,
+        "longitude": -3.7093375
+      },
+      "title": "Restaurante Amicis",
+      "type": "Restaurante",
+      "address": "Calle de, Pl. del Conde de Miranda, 4"
+    },
+    {
+      "position": 18,
+      "rating": 4.4,
+      "reviews": 2300,
+      "reviews_original": "(2,3 mil)",
+      "price": "€€",
+      "description": "\"Comida exquisita, atención espectacular, grato ambiente.\"",
+      "lsig": "AB86z5UrgpGd-MCFZE8gZZCyCAAn",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8414db2bac6ffe827b3f10d8fe5eb48d8101172d8da8decde.jpeg",
+      "place_id": "11319071897307254901",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=11319071897307254901&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.41678,
+        "longitude": -3.7014744
+      },
+      "title": "Restaurante El Gaucho",
+      "type": "Argentina",
+      "address": "Cra de S. Jerónimo, 5"
+    },
+    {
+      "position": 19,
+      "rating": 4.7,
+      "reviews": 2900,
+      "reviews_original": "(2,9 mil)",
+      "price": "€€",
+      "description": "\"Comida espectacular, ambiente agradable y servicio impecable.\"",
+      "lsig": "AB86z5XbVICpMWSQh8GhHNHgf3Gt",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8f518eacd27f37df9e869993b076a996ad156bbd8f5adea28.jpeg",
+      "place_id": "2002558419467865948",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=2002558419467865948&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.411766,
+        "longitude": -3.6954176
+      },
+      "title": "La Malontina",
+      "type": "Española",
+      "address": "C. de la Verónica, 4"
+    },
+    {
+      "position": 20,
+      "rating": 4.7,
+      "reviews": 10000,
+      "reviews_original": "(10 mil)",
+      "price": "€€€",
+      "description": "\"Experiencia muy buena, comida y carne excelente y servicio impecable.\"",
+      "lsig": "AB86z5UurP0XGZAF0LPiagEGQCdC",
+      "thumbnail": "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/199f40731909c9d8fc839199c7dae77620368576c25cc26f8cf1ee49b118f9ff.jpeg",
+      "place_id": "13578834006534102005",
+      "place_id_search": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&ludocid=13578834006534102005&q=RESTAURANTES",
+      "gps_coordinates": {
+        "latitude": 40.415695,
+        "longitude": -3.6990304
+      },
+      "title": "La Cabaña Argentina",
+      "type": "Argentina",
+      "address": "C. de Ventura de la Vega, 9, y 10"
+    }
+  ],
+  "discover_more_places": [
+    {
+      "title": "Mejores bebidas",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=mejor+vida+nocturna&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CZc-6lc_L0cACcKSPodYljwiCdEmH3GLMwY_&rlt=Mejores+bebidas&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAE",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Mejores%20bebidas&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Taberna La Descubierta, Parrilla El Gaucho Tetuan - Restaurante Argentino",
+      "images": [
+        "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/69f3157a3678be934e4efc1e2d304c7177fd6c7ed2c049d2635cf8d333eb3225.jpeg",
+        "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/69f3157a3678be934e4efc1e2d304c7177fd6c7ed2c049d2c47c9ea1d93c5289.jpeg",
+        "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/69f3157a3678be934e4efc1e2d304c7177fd6c7ed2c049d23a2746debdda1350.jpeg"
+      ]
+    },
+    {
+      "title": "Cafetería y repostería",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=caf%C3%A9+y+postres&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CfLYrGXrsK9eCfghg_UD6n7xCTvleVuDUOjX&rlt=Cafeter%C3%ADa+y+reposter%C3%ADa&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAK",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Cafeter%C3%ADa%20y%20reposter%C3%ADa&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Cañas y Tapas, Tapas & Más",
+      "images": [
+        "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/69f3157a3678be934e4efc1e2d304c71958ae26b0cc2bb4d14baf0bb28991b65.jpeg",
+        "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/69f3157a3678be934e4efc1e2d304c71958ae26b0cc2bb4d38f5806d81626e76.png",
+        "https://serpapi.com/searches/692c870cd3fb85aed94bee21/images/69f3157a3678be934e4efc1e2d304c71958ae26b0cc2bb4d5baf6ae687214bdb.jpeg"
+      ]
+    },
+    {
+      "title": "Restaurantes acogedores",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=restaurantes+acogedores+e+%C3%ADntimos&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CWz3zEJu9ZVbCS5lquU1AdGCCfC1kqR2-gsu&rlt=Restaurantes+acogedores&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAQ",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Restaurantes%20acogedores&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Alhambra, Las Brasas de Vulcano",
+      "images": [
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSw-a1WI5OGasoIX0uMFYVOxFUxyCSNY2N-UZCdMyWN8uXQhtm5bmZBIYkmOyjJ_ZF1I6amY5CP-z0BUJcAk6AiFTugKgo6zEBhndsssDx2mdiFOXQClhNzgqVfz_rd5l9l2kENL=w102-h115-n-k-no",
+        "https://lh3.googleusercontent.com/p/AF1QipMUYtvzK2pwqtu7fs59Ft8KKAkO7dBxy4FuIIKm=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/p/AF1QipNNWun4vb0bCHxiPqiiESSO9dRwmR_t_DtCyU1n=w102-h57-n-k-no"
+      ]
+    },
+    {
+      "title": "Mejores comidas",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=mejor+para+cenar&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CYLyrfz_-gYtCXUQG2rraxWdCYtTqNnhbr5d&rlt=Mejores+comidas&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAW",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Mejores%20comidas&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Pampa Beef Parrilla Argentina, Restaurante El Gaucho",
+      "images": [
+        "https://lh3.googleusercontent.com/p/AF1QipNok2bPJPEHOllpV-G_qGRHE0u-xBnCUHEQw3Sj=w102-h115-n-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyORORJzXjTzz6ODT6X1fPGHkDfPFFQEAViJdisZQnPeY9IHbZFWqCn8ii2_uNGKGCDh828unTE5-ws-kgufvNacXTCa57ANVJCo-3BOdP3hyxC4l6NUwWLwyCgNFohgyv7zl9gr3e9gNSW=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/p/AF1QipMt5q7e510Bf9iGcz0NXl0LEF9XXMkJDNyn4T84=w102-h57-n-k-no"
+      ]
+    },
+    {
+      "title": "Comida española",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=restaurante+espa%C3%B1ol&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CcI9whzZeuuUCR1uacV0kL1ZCSFXVzzKuVCg&rlt=Comida+espa%C3%B1ola&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAc",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Comida%20espa%C3%B1ola&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Venta El Buscón, Taberna La Fragua de Vulcano",
+      "images": [
+        "https://lh3.googleusercontent.com/R--pbYFQViBpO4Lg10MT86xkzGm4iC7LGGq-BqrO_Vcwa7fxMSS4E05BvGwCudGz1tak7fKP5XcBTQsO=w102-h115-n",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwstIU1PQZPHy0AHavcQP0TlVObTaRJtlcaoDOLo1AZXx7_4SUzlyeH-0taZLH51iVty531iWmWBoTHXQG7unOQABVIA5AqBCT7hm9-DcNUBaVJhAvGGWZ5WeM-AP5MNSMHQ8P8Lg=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/p/AF1QipNWVXwoq4uxIo5HuUnQ2PRyJLDEUSK6SdsxLqfX=w102-h57-n-k-no"
+      ]
+    },
+    {
+      "title": "Mejores cafeterías",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=mejor+caf%C3%A9&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CVre0yF83O6SCU0seDyDbnBcCXbmfxyNMuAO&rlt=Mejores+cafeter%C3%ADas&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAi",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Mejores%20cafeter%C3%ADas&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Las Bravas, Mu! el placer de la carne",
+      "images": [
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxZawrpunYXmDwwWGPtJFr0bkTUh54XDaE920w8tesdPrFkW0Gaz3_kc_uUDGuSDH1MT0Zn8Fr9pciFozkxC9jPL46fCoARyHijUglVMmgxXKQclUhsFJ-TNnnKnb6WEXxuqeM2=w102-h115-n-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzEprz2X2X_lnslYAsUQBiWPDOU6pcRwYd-SSJ0AKyzzsYxCVfyytEn32arWO3wS3h2IBcnUyhL60t7bOJEccyBJQrQ5m0ZKaqCwtuJC0MFv1tAIcuCJMvHvg21GXr5PEjrw1n9=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxru19J5wmR9TDj-T1gPSxV54q5ayhyLCcdIgb1zXZ71z2SIkWlGTDZWPuFI42KZKq1Vmez932OJY_8y6wm3XnvIEaEfALTHDLllBs8VAMKqOPam9fIPvhwOU8nIKZmBvXOQ7I=w102-h57-n-k-no"
+      ]
+    },
+    {
+      "title": "Comidas para grupos",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=restaurantes+para+grupos&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CUXUWz2EU3-jCfWbdc-VtXG8CVRr6FdyVvbL&rlt=Comidas+para+grupos&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAo",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Comidas%20para%20grupos&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Las Bravas, La Cabaña Argentina",
+      "images": [
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxaa0vtrL8sS2sKkHjSJA_3chyy7JC5Ys7qKhnjFVwGCzeeHNII6GqrqihDVjo_JV3IJgrUK8cXU2fA65LvuBK4hLby_6wPJSGDX0tbZ8aTU5Vg7iuxPPybGPyhrV2s7tEkq5Kk=w102-h115-n-k-no",
+        "https://lh3.googleusercontent.com/p/AF1QipNi-rXHys5WBPbS7JBNedlRNt5qy0tlB0W_XOia=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/p/AF1QipMhn6Ypy3d126KfaexPMuvqJb7e2xMe_d5JUi5w=w102-h57-n-k-no"
+      ]
+    },
+    {
+      "title": "Bar",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=Bar&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CVr1S1UbXxFMCcBqXf_ZH8I6CeRLhdTYvnXv&rlt=Bar&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRAu",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Bar&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Inclan Brutal Bar I Restaurante temático Madrid, Tapa Tapa Santa Ana",
+      "images": [
+        "https://lh3.googleusercontent.com/p/AF1QipM9KN4WOMdmiwWQwrcBP2ZRs2U0FjoaZdh9TKfL=w102-h115-n-k-no",
+        "https://lh3.googleusercontent.com/p/AF1QipOYCVUEyuG_-zVzOeGaV6_9jaFUyL-oa0kbQPb-=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxmF1cT1JSAmzA-3jXFx2OlsESUcajv6ig-Oa4b9kw2_n9VuxKhcwfcteakebbX_GmmbqBfpw5EsM3tS9ZrrOw8KlAUN0yxpu_umUym1MFLqJItlcAq836dbOHylC8IQ5SxWwk=w102-h57-n-k-no"
+      ]
+    },
+    {
+      "title": "Bares de tapas",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=Bar+de+tapas&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CV-cKSOHqWfsCVGVvly1s9XvCZdcq0RHonnm&rlt=Bares+de+tapas&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRA0",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Bares%20de%20tapas&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Taberna Malaspina, Casa Labra",
+      "images": [
+        "https://lh3.googleusercontent.com/p/AF1QipN2-h5XIujU4KY_1BfvdubBZxs88ysVdCyznIC6=w102-h115-n-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSz4RZ8ADZSoEHj06p-CGCcgxXVap3-x5CRO01ZrRty4dKH_9RFL8xkO-zgCs4AvRRqGTvKW2tKtffXUwov1MwQtcVRpWXJzIW5oPRIVIdbpINgZfYkq0mz91fuscOFyJ19Bvoo=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxG-B2qRmS169wwoKUPPwaRhgNXeUG5Z97P15_o0uM84WFKriIPcFx2CK1R9oFV5rSbIpvTFV0baAq-MUmSkd3DYvzg3A8oMMOFCCFhHU8wQTFmSzj-YygFNHgSl4Uohe8PfXNu=w102-h57-n-k-no"
+      ]
+    },
+    {
+      "title": "Restaurantes argentinos",
+      "link": "https://www.google.es/search?sca_esv=3667fffe2cbb1e60&gl=es&hl=es&tbm=lcl&q=Restaurante+argentino&rflfq=1&num=10&uule=w+CAQQCFISCYE8CoCXKUINEWkijGHB3jbE&lsspp=CWpyokiXnKE6CateqNtX6F5JCZB8J9ZVrC9M&rlt=Restaurantes+argentinos&owsq=RESTAURANTES&sa=X&ved=2ahUKEwiyu-79upqRAxVAtoQIHVsjDKwQ9s8CegQIHRA6",
+      "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&q=Restaurantes%20argentinos&uule=w%20CAQQCFISCYE8CoCXKUINEWkijGHB3jbE",
+      "places": "Estancia La Adriana - Restaurante Argentino, Morfi Empanadas Argentinas",
+      "images": [
+        "https://lh3.googleusercontent.com/ZWXmG3bPBZVGdqLw_kgl3PL_bhoZ1PdduhJ-kCZxGXmLihLhe6FJ8GWJ_B-68g=w102-h115-n",
+        "https://lh3.googleusercontent.com/p/AF1QipPbQsQIRqCcMBMi_LRIp9_pjhH_CWdPmG3kOYLo=w102-h57-n-k-no",
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSybJABIQxc7JtYf2unK02UBecDygBK8Qqa3GDxO8QzipHEc0-WOfbWaCGWoBu_elLgN9k_XS6VQW6nO_xnctwxZO4xFCXS_1Wu4PDfgaT8U1unyXWll8HiIyMK3iU9FRfNZsMg=w102-h57-n-k-no"
+      ]
+    }
+  ],
+  "pagination": {
+    "current": 1,
+    "next": "https://www.google.es/search?q=RESTAURANTES&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4&hl=es&gl=es&start=20&tbm=lcl",
+    "other_pages": {
+      "2": "https://www.google.es/search?q=RESTAURANTES&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4&hl=es&gl=es&start=20&tbm=lcl",
+      "3": "https://www.google.es/search?q=RESTAURANTES&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4&hl=es&gl=es&start=40&tbm=lcl",
+      "4": "https://www.google.es/search?q=RESTAURANTES&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4&hl=es&gl=es&start=60&tbm=lcl",
+      "5": "https://www.google.es/search?q=RESTAURANTES&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4&hl=es&gl=es&start=80&tbm=lcl"
+    }
+  },
+  "serpapi_pagination": {
+    "current": 1,
+    "next_link": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&q=RESTAURANTES&start=20&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4",
+    "next": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&q=RESTAURANTES&start=20&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4",
+    "other_pages": {
+      "2": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&q=RESTAURANTES&start=20&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4",
+      "3": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&q=RESTAURANTES&start=40&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4",
+      "4": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&q=RESTAURANTES&start=60&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4",
+      "5": "https://serpapi.com/search.json?device=desktop&engine=google_local&gl=es&google_domain=google.es&hl=es&location=Madrid%2C+Community+of+Madrid%2C+Spain&q=RESTAURANTES&start=80&uule=w+CAIQICIgTWFkcmlkLENvbW11bml0eSBvZiBNYWRyaWQsU3BhaW4"
+    }
+  }
+}
