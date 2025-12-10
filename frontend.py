@@ -3,23 +3,28 @@ import time
 import base64
 from datetime import datetime, time as dt_time
 
-# NOTA: Asegúrate de tener este módulo o comenta la línea si solo pruebas UI
-from backend_google_places_module import PlaceSearchPayload, places_text_search
-
 # ==========================================
 # CONFIGURACIÓN DE PÁGINA
 # ==========================================
 st.set_page_config(layout="wide", page_title="FoodLooker", page_icon="🍽️")
 
+# Backend Dummy
+try:
+    from backend_google_places import PlaceSearchPayload, places_text_search
+except ImportError:
+    class PlaceSearchPayload:
+        def __init__(self, **kwargs): pass
+    def places_text_search(payload): return {}
+
 # ==========================================
 # DEFINICIÓN DE COLORES Y ESTILOS
 # ==========================================
 COLOR_BG = "#F9F4E6"  # Crema fondo general
-COLOR_PRIMARY = "#E07A5F"  # Coral/Salmón (Header y botones)
+COLOR_PRIMARY = "#E07A5F"  # Coral/Salmón
 COLOR_TEXT = "#4A4A4A"  # Texto gris oscuro
 COLOR_INPUT_BG = "#2C2C2C"  # Fondo negro del input grande
 
-# Función para cargar imagen local como base64
+# Carga de imagen (Logo)
 def get_base64_image(image_path):
     try:
         with open(image_path, "rb") as img_file:
@@ -27,10 +32,9 @@ def get_base64_image(image_path):
     except FileNotFoundError:
         return None
 
-# Intentamos cargar el logo
 logo_b64 = get_base64_image("logo.jpeg")
 
-# CSS PERSONALIZADO
+# CSS GENERAL
 st.markdown(f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -73,13 +77,13 @@ st.markdown(f"""
 
     /* INPUTS BLANCOS */
     div[data-baseweb="input"] > div, 
-    div[data-baseweb="select"] > div,
-    div[data-baseweb="calendar"] {{
+    div[data-baseweb="select"] > div {{
         background-color: white !important;
         border-radius: 10px !important;
-        border: 1px solid #ddd !important;
+        border: 1px solid #cccccc !important;
         color: #333 !important;
     }}
+    input {{ color: #333 !important; }}
 
     /* TEXT AREA GRANDE (NEGRO) */
     textarea {{
@@ -104,40 +108,7 @@ st.markdown(f"""
         display: none;
     }}
 
-    /* CONTENEDOR DE PREFERENCIAS (Borde Coral) */
-    div[data-testid="stVerticalBlockBorderWrapper"] {{
-        border-color: {COLOR_PRIMARY} !important;
-        border-width: 2px !important;
-        border-radius: 15px !important;
-        background-color: {COLOR_BG}; 
-    }}
-
-    /* Cabecera del contenedor (Truco visual con márgenes negativos) */
-    .prefs-header-integrated {{
-        background-color: {COLOR_PRIMARY};
-        padding: 15px;
-        text-align: center;
-        color: white;
-        font-weight: 700;
-        font-size: 1.3rem;
-        margin-top: -16px; 
-        margin-left: -16px;
-        margin-right: -16px;
-        margin-bottom: 15px;
-        border-radius: 12px 12px 0 0;
-    }}
-
-    /* Estilo para el expander de fecha */
-    .streamlit-expanderHeader {{
-        background-color: white !important;
-        border-radius: 8px !important;
-        font-size: 0.9rem !important;
-        color: {COLOR_PRIMARY} !important;
-        font-weight: 600 !important;
-        border: 1px solid #ddd !important;
-    }}
-
-    /* CARDS RESULTADOS */
+    /* TARJETAS RESULTADOS */
     .restaurant-card {{
         background-color: #EFEDE6;
         padding: 20px;
@@ -167,23 +138,33 @@ st.markdown(f"""
         background-color: #D66A4F;
         transform: translateY(-2px);
     }}
-
-    /* Estilo específico para la lista compacta del panel derecho */
-    .compact-list-item {{
-        display: flex;
-        margin-bottom: 8px;
-        align-items: center;
-        color: #5A4A42; /* Color forzado marrón oscuro */
-        font-size: 0.95rem;
-    }}
-    .compact-icon {{
-        margin-right: 10px;
-        font-size: 1.1rem;
-        width: 25px;
-        text-align: center;
-    }}
-
+    
     .block-container {{ padding-top: 2rem; }}
+
+    /* EXPANDER CUSTOMIZATION */
+    details > summary {{
+        background-color: white !important;
+        color: #5A4A42 !important;
+        border: 1px solid #cccccc !important;
+        border-radius: 8px !important;
+        padding: 10px 15px !important;
+    }}
+    details > summary > span, details > summary p {{
+        font-weight: 600 !important;
+        color: #5A4A42 !important;
+    }}
+    details > summary svg {{
+        fill: #5A4A42 !important;
+        color: #5A4A42 !important;
+    }}
+    div[data-testid="stExpanderDetails"] {{
+        border: 1px solid #cccccc;
+        border-top: none;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        background-color: white;
+        padding: 20px;
+    }}
 
 </style>
 """, unsafe_allow_html=True)
@@ -193,7 +174,6 @@ st.markdown(f"""
 # ==========================================
 if 'step' not in st.session_state:
     st.session_state.step = 1
-
 if 'selected_date' not in st.session_state:
     st.session_state.selected_date = None
 if 'selected_time' not in st.session_state:
@@ -218,11 +198,50 @@ def render_header():
 # ==========================================
 def render_screen_1():
     render_header()
+    
+    # === CSS ESPECÍFICO PARA ARREGLAR CHECKBOX Y CALENDARIO ===
+    st.markdown("""
+        <style>
+        /* 1. ARREGLAR TEXTO DEL CHECKBOX */
+        div[data-testid="stCheckbox"] label p {
+            color: #5A4A42 !important; /* Marrón oscuro forzado */
+            font-weight: 600 !important;
+        }
+        /* Por seguridad, si el DOM cambia ligeramente */
+        div[data-testid="stCheckbox"] span {
+            color: #5A4A42 !important;
+        }
+
+        /* 2. ARREGLAR CALENDARIO */
+        div[role="grid"] div { color: #333333 !important; }
+        div[data-baseweb="calendar"] { background-color: #FFFFFF !important; }
+        div[role="grid"] div:hover { background-color: #E07A5F !important; color: white !important; }
+        div[data-baseweb="calendar"] button { color: #333333 !important; }
+        
+        /* 3. ARREGLAR PLACEHOLDER */
+        input::placeholder { color: #888 !important; opacity: 1 !important; }
+        </style>
+    """, unsafe_allow_html=True)
 
     col_left, col_spacer, col_right = st.columns([1.2, 0.1, 1])
+    
+    # ==========================================
+    # --- VARIABLES DE ENTRADA ---
+    search_clicked = False
+    query = ""
+    location = ""
+    mins = None
+    price = None
+    extra_input = ""
+    travel_mode = ""
+    max_distance = None
+    col_date = None
+    col_time = None
 
+    # ==========================================
+    
+    # --- COLUMNA IZQUIERDA ---
     with col_left:
-        # Welcome Card
         st.markdown("""
         <div style="background-color: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
             <h3 style="margin-top:0; color:#E07A5F; font-weight:700;">¡Buenas tardes! 🍱</h3>
@@ -232,7 +251,6 @@ def render_screen_1():
                 <ul style="padding-left: 20px; line-height: 1.6;">
                     <li>"Busco un restaurante japonés para 2 personas esta noche"</li>
                     <li>"Necesito un lugar con terraza cerca del Retiro"</li>
-                    <li>"Restaurante italiano romántico para cena de aniversario"</li>
                 </ul>
             </div>
         </div>
@@ -245,90 +263,131 @@ def render_screen_1():
             height=140,
             label_visibility="collapsed"
         )
-
         st.write("")
-        if st.button("Buscar Disponibilidad", use_container_width=True):
-            if query:
-                with st.spinner("Buscando restaurantes..."):
+        search_clicked = st.button("Buscar Disponibilidad", use_container_width=True)
 
-                    # 1. DUMMY Payload
-                    dummy_payload = PlaceSearchPayload(
-                        query="restaurante japonés",
-                        location="Plaza España, Madrid",
-                        radius=1500,
-                        price_level=2,
-                        extras=[],
-                        max_travel_time=None,
-                        travel_mode="walking"
-                    )
 
-                    # 2. Llamada REAL
-                    try:
-                        api_response = places_text_search(dummy_payload)
-                    except Exception as e:
-                        st.error(f"Error consultando Google Places: {e}")
-                        st.stop()
-
-                    # 3. PROCESAMIENTO
-                    # >>> MEJORA: Seleccionamos solo los 3 primeros resultados <<<
-                    places = api_response.get("results", [])[:3] 
-
-                    processed = []
-                    for i, p in enumerate(places):
-                        processed.append({
-                            "id": i + 1,
-                            "name": p.get("name"),
-                            "area": p.get("neighborhood", "Madrid Centro"), # Fallback si viene vacío
-                            "price": "€€",  
-                            "avail": "—", 
-                        })
-
-                    st.session_state.results = processed
-                    st.session_state.step = 2
-                    st.rerun()
-
+    # --- COLUMNA DERECHA ---
     with col_right:
         st.markdown(
             '<div style="background:#E07A5F; color:white; padding:10px 20px; border-radius:10px; font-weight:bold; display:inline-block; margin-bottom:10px;">¿Dónde te encuentras?</div>',
             unsafe_allow_html=True)
-        st.text_input("Ubicación", placeholder="Ubicación: ej: Plaza España, Madrid", label_visibility="collapsed")
+        
+        location = st.text_input("Ubicación", placeholder="Ubicación: ej: Plaza España, Madrid", label_visibility="collapsed")
 
         st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Desplegable de Preferencias
+        with st.expander("⚙️ Preferencias Avanzadas (Hora, Precio, Transporte...)", expanded=False):
+            
+            # --- 1. SECCIÓN TIEMPO (Lógica conmutada) ---
+            # --- 1. SECCIÓN TIEMPO ---
+            st.markdown('<p style="color:#6B4423; font-weight:600; margin-bottom:5px;">🕒 ¿Cuándo?</p>', unsafe_allow_html=True)
+            
+            # 1. Creamos un CONTENEDOR VACÍO arriba para poner el Slider o el Calendario
+            time_container = st.container()
 
-        with st.container(border=True):
-            st.markdown('<div class="prefs-header-integrated">Customiza Preferencias</div>', unsafe_allow_html=True)
+            # 2. Ponemos el CHECKBOX debajo
+            # Añadimos un poco de margen top para separarlo visualmente del contenedor de arriba
+            st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True) 
+            use_specific_time = st.checkbox("📅 Programar para una fecha/hora específica", value=False)
+            
+            # 3. Rellenamos el contenedor de ARRIBA basándonos en el checkbox de ABAJO
+            with time_container:
+                if not use_specific_time:
+                    # --- MODO A: SLIDER (Se muestra ARRIBA si NO está marcado) ---
+                    st.markdown('<p style="font-size:0.85rem; color:#888; margin-top:-10px; margin-bottom:10px;">Selecciona tiempo de espera aproximado:</p>', unsafe_allow_html=True)
+                    c1, c2 = st.columns([3, 1])
+                    with c1:
+                        mins = st.slider("Minutos", 10, 120, 50, label_visibility="collapsed")
+                    with c2:
+                        st.markdown(f'<div style="margin-top:5px; font-weight:bold; color:#5A4A42;">{mins} min</div>', unsafe_allow_html=True)
+                    
+                    # Limpiamos variables de fecha para no confundir a la lógica final
+                    st.session_state.selected_date = None
+                    st.session_state.selected_time = None
+                    
+                else:
+                    # --- MODO B: FECHA EXACTA (Se muestra ARRIBA si SÍ está marcado) ---
+                    st.markdown('<p style="font-size:0.85rem; color:#888; margin-top:-10px; margin-bottom:10px;">Selecciona el momento exacto:</p>', unsafe_allow_html=True)
+                    col_date, col_time = st.columns(2)
+                    with col_date:
+                        st.session_state.selected_date = st.date_input("Fecha", datetime.now())
+                    with col_time:
+                        st.session_state.selected_time = st.time_input("Hora", dt_time(21, 00))
 
-            # Tiempo
-            st.markdown('<p style="color:#6B4423; font-weight:600; margin-bottom:5px;">¿Para dentro de cuanto?</p>', unsafe_allow_html=True)
-            c1, c2 = st.columns([3, 1])
-            with c1:
-                mins = st.slider("Minutos", 10, 120, 50, label_visibility="collapsed")
-            with c2:
-                st.markdown(f'<div style="margin-top:5px; font-weight:bold; color:#5A4A42;">{mins} mins</div>', unsafe_allow_html=True)
+            # Separador visual después del checkbox
+            st.markdown("<hr style='margin: 15px 0; border-color: #eee;'>", unsafe_allow_html=True)
 
-            # Fecha/Hora
-            st.markdown("<div style='height: 5px;'></div>", unsafe_allow_html=True)
-            with st.expander("📅 O elige fecha y hora exacta"):
-                col_date, col_time = st.columns(2)
-                with col_date:
-                    st.session_state.selected_date = st.date_input("Fecha", datetime.now())
-                with col_time:
-                    st.session_state.selected_time = st.time_input("Hora", dt_time(21, 00))
+            # --- 2. RESTO DE PREFERENCIAS ---
+            
+            # Transporte
+            st.markdown('<p style="color:#6B4423; font-weight:600; margin-bottom:5px;">Modo de transporte</p>', unsafe_allow_html=True)
+            transport_options = {"Caminando": "walking", "Transporte público": "transit", "Coche/Taxi": "driving", "Bicicleta": "bicycling"}
+            c5, c6 = st.columns([3, 1])
+            with c5:
+                selected_transport_label = st.selectbox("Transporte", options=list(transport_options.keys()), index=0, label_visibility="collapsed")
+            with c6:
+                st.markdown(f'<div style="margin-top:5px; font-weight:bold; color:#5A4A42;">{selected_transport_label}</div>', unsafe_allow_html=True)
+            travel_mode = transport_options[selected_transport_label]
+
+            # Distancia
+            st.markdown('<p style="color:#6B4423; font-weight:600; margin-bottom:5px; margin-top:15px;">Distancia máxima al sitio (km)</p>', unsafe_allow_html=True)
+            c7, c8 = st.columns([3, 1])
+            with c7:
+                max_distance = st.slider("Distancia (km)", 0.1, 30.0, 15.0, label_visibility="collapsed")
+            with c8:
+                st.markdown(f'<div style="margin-top:5px; font-weight:bold; color:#5A4A42;">{max_distance} km</div>', unsafe_allow_html=True)
 
             # Precio
             st.markdown('<p style="color:#6B4423; font-weight:600; margin-bottom:5px; margin-top:15px;">Rango precio (€ - €€€€)</p>', unsafe_allow_html=True)
             c3, c4 = st.columns([3, 1])
             with c3:
-                price = st.select_slider("Precio", options=["€", "€€", "€€€", "€€€€"], value="€€", label_visibility="collapsed")
+                price_options = {"€": 1, "€€": 2, "€€€": 3, "€€€€": 4}
+                price = st.select_slider("Precio", options=list(price_options.keys()), value="€€", label_visibility="collapsed")
             with c4:
                 st.markdown(f'<div style="margin-top:5px; font-weight:bold; color:#5A4A42;">{price}</div>', unsafe_allow_html=True)
 
             # Extras
             st.write("")
             st.markdown('<p style="color:#6B4423; font-weight:600; margin-bottom:5px;">Alguna preferencia extra?</p>', unsafe_allow_html=True)
-            st.markdown('<p style="color:#888; font-size:0.85rem; margin-top:-5px;">Ej: Vegano, solo terraza, celiaco...</p>', unsafe_allow_html=True)
-            st.text_input("Extras", placeholder="Introduce preferencias", label_visibility="collapsed")
+            extra_input = st.text_input("Extras", placeholder="Ej: Vegano, solo terraza, celiaco...", label_visibility="collapsed")
 
+    # ==========================================
+    # LÓGICA DE BÚSQUEDA
+    # ==========================================
+    if search_clicked:
+        if query or location:
+            with st.spinner("Buscando restaurantes..."):
+
+                # Payload de ejemplo
+                dummy_payload = {
+                    "query": f"{query} {extra_input}",
+                    "location": location,
+                    "price": price,
+                    "is_scheduled": use_specific_time
+                }
+
+                # MOCK RESPUESTA
+                api_response_mock = [
+                    {"name": "Sushi Bar Zen", "area": "Centro", "price": "€€"},
+                    {"name": "Taverna del Sur", "area": "Retiro", "price": "€€€"},
+                    {"name": "Green Garden", "area": "Chamberí", "price": "€"}
+                ]
+                
+                processed = []
+                for i, p in enumerate(api_response_mock):
+                    processed.append({
+                        "id": i + 1,
+                        "name": p.get("name"),
+                        "area": p.get("area"), 
+                        "price": p.get("price"),  
+                        "avail": "✅ Disp",
+                    })
+
+                st.session_state.results = processed
+                st.session_state.step = 2
+                st.rerun()
 
 # ==========================================
 # PANTALLA 2: RESULTADOS
@@ -336,7 +395,6 @@ def render_screen_1():
 def render_screen_2():
     render_header()
 
-    # >>> MEJORA: Ajuste de columnas para dar más espacio a resultados [2, 0.1, 1] <<<
     col_res, col_space, col_filt = st.columns([2, 0.1, 1])
 
     with col_res:
@@ -360,7 +418,6 @@ def render_screen_2():
             </div>
             """, unsafe_allow_html=True)
 
-            # Botones de reordenar más compactos
             c1, c2, c3 = st.columns([0.1, 0.1, 0.8])
             with c1:
                 if index > 0:
@@ -393,36 +450,29 @@ def render_screen_2():
             st.rerun()
 
     with col_filt:
-        # >>> MEJORA: Panel lateral compacto y con colores forzados para visibilidad <<<
+        # Panel lateral compacto
         with st.container(border=True):
-            # Cabecera
             st.markdown('<div class="prefs-header-integrated">Configuración Actual</div>', unsafe_allow_html=True)
-
-            # Lógica fecha string
-            date_str_display = "~50 min"
-            date_obj = st.session_state.get('selected_date')
-            if date_obj and date_obj != datetime.now().date():
-                 time_obj = st.session_state.get('selected_time')
-                 date_str_display = f"{date_obj.strftime('%d/%m')} - {time_obj.strftime('%H:%M')}"
-
-            # Contenido compacto con HTML para asegurar color oscuro
+            
+            # Lógica simple para mostrar algo en el resumen
+            date_display = "~50 mins"
+            if st.session_state.selected_date:
+                t = st.session_state.selected_time
+                date_display = f"{st.session_state.selected_date.strftime('%d/%m')} {t.strftime('%H:%M') if t else ''}"
+            
             st.markdown(f"""
                 <div style="padding: 0 10px 10px 10px;">
-                    <div class="compact-list-item">
-                        <span class="compact-icon">📍</span>
+                    <div style="display:flex; margin-bottom:8px; align-items:center; color:#5A4A42;">
+                        <span style="margin-right:10px; font-size:1.1rem; width:25px; text-align:center;">📍</span>
                         <span>Plaza España</span>
                     </div>
-                    <div class="compact-list-item">
-                        <span class="compact-icon">⏱</span>
-                        <span>{date_str_display}</span>
+                    <div style="display:flex; margin-bottom:8px; align-items:center; color:#5A4A42;">
+                        <span style="margin-right:10px; font-size:1.1rem; width:25px; text-align:center;">⏱</span>
+                        <span>{date_display}</span>
                     </div>
-                    <div class="compact-list-item">
-                        <span class="compact-icon">💰</span>
+                    <div style="display:flex; margin-bottom:8px; align-items:center; color:#5A4A42;">
+                        <span style="margin-right:10px; font-size:1.1rem; width:25px; text-align:center;">💰</span>
                         <span>€€</span>
-                    </div>
-                    <div class="compact-list-item">
-                        <span class="compact-icon">📝</span>
-                        <span>Sin extras</span>
                     </div>
                 </div>
             """, unsafe_allow_html=True)

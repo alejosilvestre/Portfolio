@@ -1,3 +1,140 @@
+"""
+===========================================================
+DOCUMENTACIÓN - Módulo de Búsqueda Avanzada Google Places
+===========================================================
+
+Este módulo implementa un wrapper mejorado para la API de 
+Google Places, permitiendo realizar búsquedas tipo "Text Search"
+con geocodificación automática de direcciones, obtención de 
+detalles avanzados de cada lugar y filtrado opcional por 
+tiempo máximo de viaje usando Distance Matrix.
+
+El flujo interno del módulo es:
+1) Geocodificar la ubicación si se pasa como texto.
+2) Ejecutar Places Text Search.
+3) Para cada sitio encontrado, obtener detalles avanzados (Place Details).
+4) Normalizar los datos para facilitar su uso.
+5) Filtrar resultados por tiempo máximo de viaje (opcional).
+6) Devolver resultados enriquecidos y uniformes.
+
+
+-----------------------------------------------------------
+1. Clase principal de entrada: PlaceSearchPayload
+-----------------------------------------------------------
+
+Define todos los parámetros que puede recibir la búsqueda:
+
+- query (str): Término(s) de búsqueda ("cafeterías", "gimnasios", etc.).
+- location (str | None): Ciudad, dirección o coordenadas "lat,lng".
+  Si no se especifica, usa por defecto Puerta del Sol (Madrid).
+- radius (int): Radio de búsqueda en metros (default: 1500).
+- price_level (int | None): Filtrado por nivel de precio de 0 a 4.
+- extras (list[str]): Palabras clave adicionales para añadir a la query.
+- max_travel_time (int | None): Tiempo máximo de viaje en minutos.
+- travel_mode (str): walking, driving, bicycling o transit.
+
+Esta clase es el *único input* que debe recibir la función places_text_search().
+
+
+-----------------------------------------------------------
+2. Función principal: places_text_search(payload)
+-----------------------------------------------------------
+
+Esta función realiza todo el proceso de búsqueda:
+
+1) Normaliza la ubicación:
+   - Si location ya es "lat,lng", la usa directamente.
+   - Si no, llama a geocode_location() para convertir texto → coordenadas.
+
+2) Construye la query combinando query + extras.
+
+3) Llama a:
+   https://maps.googleapis.com/maps/api/place/textsearch/json
+
+4) Para cada resultado:
+   - Extrae datos básicos (nombre, dirección, rating, tipos…)
+   - Llama a Place Details para obtener info avanzada:
+     horarios, teléfono, website, precio, barrio, etc.
+   - Normaliza los datos en un diccionario uniforme.
+
+5) Si el payload incluye max_travel_time:
+   Filtra los resultados usando Distance Matrix API.
+
+6) Devuelve un diccionario:
+{
+    "results": [... lista de lugares con detalles ...],
+    "status": "OK",
+    "total_results": X
+}
+
+
+-----------------------------------------------------------
+3. Ejemplo de uso
+-----------------------------------------------------------
+
+from module_name import PlaceSearchPayload, places_text_search
+
+payload = PlaceSearchPayload(
+    query="cafeterías",
+    location="Gran Via, Madrid",
+    extras=["specialty", "wifi"],
+    radius=1200,
+    max_travel_time=10,
+    travel_mode="walking"
+)
+
+response = places_text_search(payload)
+
+print(response["total_results"])
+for place in response["results"]:
+    print(place["name"], "-", place["address"])
+
+
+-----------------------------------------------------------
+4. Ejemplo de output (simplificado)
+-----------------------------------------------------------
+
+{
+  "status": "OK",
+  "total_results": 2,
+  "results": [
+    {
+      "name": "Café de Especialidad Madrid",
+      "address": "Calle Ejemplo 12, Madrid",
+      "neighborhood": "Centro",
+      "phone": "+34 600 123 456",
+      "website": "https://cafespecialidad.com",
+      "opening_hours": {...},
+      "place_id": "abcdef123456",
+      "types": ["cafe", "restaurant", ...],
+      "rating": 4.7,
+      "user_ratings_total": 235,
+      "price_level": 2,
+      "location": {"lat": 40.42, "lng": -3.70}
+    },
+    {
+      "name": "Roasters Madrid",
+      "address": "Avenida Ejemplo 44, Madrid",
+      "neighborhood": "Sol",
+      "phone": None,
+      "website": None,
+      "opening_hours": {...},
+      "place_id": "xyz987654",
+      "types": ["cafe", "food"],
+      "rating": 4.5,
+      "user_ratings_total": 120,
+      "price_level": 1,
+      "location": {"lat": 40.421, "lng": -3.712}
+    }
+  ]
+}
+
+-----------------------------------------------------------
+
+ESTAMOS ATOPE JEFE DE EQUIPO !!!!
+
+===========================================================
+"""
 # ---------------- IMPORTS ----------------
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
