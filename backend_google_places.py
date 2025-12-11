@@ -94,40 +94,33 @@ for place in response["results"]:
 4. Ejemplo de output (simplificado)
 -----------------------------------------------------------
 
-{
-  "status": "OK",
-  "total_results": 2,
-  "results": [
-    {
-      "name": "Café de Especialidad Madrid",
-      "address": "Calle Ejemplo 12, Madrid",
-      "neighborhood": "Centro",
-      "phone": "+34 600 123 456",
-      "website": "https://cafespecialidad.com",
-      "opening_hours": {...},
-      "place_id": "abcdef123456",
-      "types": ["cafe", "restaurant", ...],
-      "rating": 4.7,
-      "user_ratings_total": 235,
-      "price_level": 2,
-      "location": {"lat": 40.42, "lng": -3.70}
-    },
-    {
-      "name": "Roasters Madrid",
-      "address": "Avenida Ejemplo 44, Madrid",
-      "neighborhood": "Sol",
-      "phone": None,
-      "website": None,
-      "opening_hours": {...},
-      "place_id": "xyz987654",
-      "types": ["cafe", "food"],
-      "rating": 4.5,
-      "user_ratings_total": 120,
-      "price_level": 1,
-      "location": {"lat": 40.421, "lng": -3.712}
-    }
-  ]
-}
+ {'name': "Sofía's bar & rest",
+ 'address': 'n° 6, C. del Pozo del Concejo, 6, 28600 Navalcarnero, Madrid, Spain',
+ 'place_id': 'ChIJfSQ69BWVQQ0Ry_AG9fwvCD0',
+ 'types': ['establishment', 'food', 'point_of_interest', 'restaurant'],
+ 'rating': 4.9,
+ 'user_ratings_total': 297,
+ 'price_level': None,
+ 'location': {'lat': 40.2870375, 'lng': -4.014548899999999},
+ 'neighborhood': 'Navalcarnero',
+ 'phone': '919 48 86 37',
+ 'website': None,
+ 'opening_hours': {'open_now': True,
+  'periods': [{'close': {'day': 1, 'time': '0000'},
+    'open': {'day': 0, 'time': '0900'}},
+   {'close': {'day': 3, 'time': '0000'}, 'open': {'day': 2, 'time': '0900'}},
+   {'close': {'day': 4, 'time': '0000'}, 'open': {'day': 3, 'time': '0900'}},
+   {'close': {'day': 5, 'time': '0000'}, 'open': {'day': 4, 'time': '0900'}},
+   {'close': {'day': 6, 'time': '0000'}, 'open': {'day': 5, 'time': '0900'}},
+   {'close': {'day': 0, 'time': '0000'}, 'open': {'day': 6, 'time': '0900'}}],
+  'weekday_text': ['Monday: Closed',
+   'Tuesday: 9:00\u202fAM\u2009–\u200912:00\u202fAM',
+   'Wednesday: 9:00\u202fAM\u2009–\u200912:00\u202fAM',
+   'Thursday: 9:00\u202fAM\u2009–\u200912:00\u202fAM',
+   'Friday: 9:00\u202fAM\u2009–\u200912:00\u202fAM',
+   'Saturday: 9:00\u202fAM\u2009–\u200912:00\u202fAM',
+   'Sunday: 9:00\u202fAM\u2009–\u200912:00\u202fAM']}
+   }
 
 -----------------------------------------------------------
 
@@ -232,7 +225,9 @@ def normalize_place_details(details: Dict[str, Any]) -> Dict[str, Any]:
 def get_place_details(place_id: str) -> Dict[str, Any]:
     params = {
         "place_id": place_id,
-        "fields": "name,formatted_address,formatted_phone_number,website,opening_hours,types,rating,user_ratings_total,price_level,geometry,address_component",
+        "fields": "name,formatted_address,formatted_phone_number,website,opening_hours,"
+                  "types,rating,user_ratings_total,price_level,geometry,"
+                  "address_components,place_id",
         "key": GOOGLE_MAPS_API_KEY
     }
     r = requests.get("https://maps.googleapis.com/maps/api/place/details/json", params=params)
@@ -290,13 +285,6 @@ def places_text_search(payload: PlaceSearchPayload) -> Dict[str, Any]:
         else:
             raise ValueError(f"No se pudo geocodificar la ubicación: {payload.location}")
 
-    # if location is not None and "," not in location:
-    #     latlng = geocode_location(location)
-    #     if latlng:
-    #         location = latlng
-    #     else:
-    #         raise ValueError(f"No se pudo geocodificar la ubicación: {payload.location}")
-
     query_keywords = payload.query
     if payload.extras:
         query_keywords += " " + " ".join(payload.extras)
@@ -340,8 +328,4 @@ def places_text_search(payload: PlaceSearchPayload) -> Dict[str, Any]:
         travel_filter = filter_by_travel_time(location, destinations, payload.max_travel_time, payload.travel_mode)
         results = [r for r, keep in zip(results, travel_filter) if keep]
 
-    return {
-        "results": results,
-        "status": data.get("status"),
-        "total_results": len(results)
-    }
+    return results

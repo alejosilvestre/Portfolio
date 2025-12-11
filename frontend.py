@@ -8,13 +8,11 @@ from datetime import datetime, time as dt_time
 # ==========================================
 st.set_page_config(layout="wide", page_title="FoodLooker", page_icon="🍽️")
 
-# Backend Dummy
-try:
-    from backend_google_places import PlaceSearchPayload, places_text_search
-except ImportError:
-    class PlaceSearchPayload:
-        def __init__(self, **kwargs): pass
-    def places_text_search(payload): return {}
+# imports propios
+
+from backend_google_places import PlaceSearchPayload, places_text_search
+from first_input_llm import call_llm
+
 
 # ==========================================
 # DEFINICIÓN DE COLORES Y ESTILOS
@@ -360,30 +358,44 @@ def render_screen_1():
         if query or location:
             with st.spinner("Buscando restaurantes..."):
 
-                # Payload de ejemplo
-                dummy_payload = {
-                    "query": f"{query} {extra_input}",
+                # creamos diccionario con todos los inputs obtenidos
+                llm_inputs = {
+                    "query": query,
                     "location": location,
-                    "price": price,
-                    "is_scheduled": use_specific_time
+                    "max_distance": max_distance,
+                    "mins": mins,
+                    "travel_mode": travel_mode,
+                    "price": price_options.get(price, 2),
+                    "col_date": str(col_date) if col_date else "",
+                    "col_time": str(col_time) if col_time else "",
+                    "extras": [e.strip().lower() for e in extra_input.split(",")] if extra_input else [
+                    ]
                 }
 
-                # MOCK RESPUESTA
-                api_response_mock = [
-                    {"name": "Sushi Bar Zen", "area": "Centro", "price": "€€"},
-                    {"name": "Taverna del Sur", "area": "Retiro", "price": "€€€"},
-                    {"name": "Green Garden", "area": "Chamberí", "price": "€"}
-                ]
+                # Llamada al LLM
+                llm_response = call_llm(
+                    prompt_variables=llm_inputs,
+                    parse_json=True
+                )
+
+                # Respuesta a api de Google Places
+                google_places_payload = PlaceSearchPayload(**llm_response)
+                resultados = places_text_search(google_places_payload)
                 
+                # Procesamos resultados para la UI filtrando los primeros 3 resultados y mostrando:
+                # Nombre, Zona, Precio, y rating
                 processed = []
-                for i, p in enumerate(api_response_mock):
+                for i, p in enumerate(resultados):
                     processed.append({
                         "id": i + 1,
                         "name": p.get("name"),
-                        "area": p.get("area"), 
-                        "price": p.get("price"),  
-                        "avail": "✅ Disp",
+                        "area": p.get("neighborhood"),
+                        "price": p.get("price_level"),
+                        "rating": p.get("rating")
                     })
+                    if i >= 2:
+                        break  # Solo los primeros 3
+
 
                 st.session_state.results = processed
                 st.session_state.step = 2
@@ -413,7 +425,7 @@ def render_screen_2():
                     <div class="card-info">{item['area']}  •  <span style="color:#5A4A42; font-weight:bold;">{item['price']}</span></div>
                 </div>
                 <div style="text-align:right;">
-                     <div style="color:#666; font-size:0.9rem;">{item['avail']}</div>
+                     <div style="color:#666; font-size:0.9rem;">{item['rating']}</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
