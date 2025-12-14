@@ -146,11 +146,13 @@ if not GOOGLE_MAPS_API_KEY:
 class PlaceSearchPayload(BaseModel):
     query: str
     location: Optional[str] = None  # ciudad o "lat,lng"
-    radius: Optional[int] = 1500
+    radius: Optional[int] = None
     price_level: Optional[int] = None
-    extras: Optional[List[str]] = []
+    extras: Optional[str] = None
     max_travel_time: Optional[int] = None  # minutos máximos
     travel_mode: Optional[str] = "walking"  # "walking", "transit", "driving", "bicycling"
+    col_date: Optional[str] = None  # fecha de la visita (YYYY-MM-DD)
+    col_time: Optional[str] = None  # hora de la visita (HH:MM
 
 # ---------------- Funciones auxiliares ----------------
 def geocode_location(location: str) -> Optional[str]:
@@ -272,7 +274,7 @@ def is_lat_lng(value: str) -> bool:
 
 
 # ---------------- Función principal ----------------
-def places_text_search(payload: PlaceSearchPayload) -> Dict[str, Any]:
+def places_text_search_old(payload: PlaceSearchPayload) -> Dict[str, Any]:
     
     #location a default a Puerta del Sol, Madrid si no hay location
     location = payload.location if payload.location is not None else "40.4238,-3.7130"
@@ -293,6 +295,77 @@ def places_text_search(payload: PlaceSearchPayload) -> Dict[str, Any]:
         "query": query_keywords,
         "location": location,
         "radius": payload.radius,
+        "key": GOOGLE_MAPS_API_KEY
+    }
+    if payload.price_level is not None:
+        params["minprice"] = payload.price_level
+        params["maxprice"] = payload.price_level
+
+    r = requests.get("https://maps.googleapis.com/maps/api/place/textsearch/json", params=params)
+    r.raise_for_status()
+    data = r.json()
+
+    results = []
+    destinations = []
+    for r_item in data.get("results", []):
+        normalized = {
+            "name": r_item.get("name"),
+            "address": r_item.get("formatted_address"),
+            "place_id": r_item.get("place_id"),
+            "types": r_item.get("types"),
+            "rating": r_item.get("rating"),
+            "user_ratings_total": r_item.get("user_ratings_total"),
+            "price_level": r_item.get("price_level"),
+            "location": r_item.get("geometry", {}).get("location"),
+            "neighborhood": extract_neighborhood(r_item.get("address_components", []))
+        }
+        if normalized["place_id"]:
+            details = get_place_details(normalized["place_id"])
+            normalized.update(details)
+        results.append(normalized)
+        destinations.append(f"{normalized['location']['lat']},{normalized['location']['lng']}")
+
+    # Filtrar por tiempo de viaje si se especifica
+    if payload.max_travel_time is not None:
+        travel_filter = filter_by_travel_time(location, destinations, payload.max_travel_time, payload.travel_mode)
+        results = [r for r, keep in zip(results, travel_filter) if keep]
+
+    return results
+
+def places_text_search(payload: PlaceSearchPayload) -> Dict[str, Any]:
+    
+    # Location a default a Puerta del Sol, Madrid si no hay location
+    location = payload.location if payload.location is not None else "40.4238,-3.7130"
+
+    if location is not None and not is_lat_lng(location):
+        latlng = geocode_location(location)
+        if latlng:
+            location = latlng
+        else:
+            raise ValueError(f"No se pudo geocodificar la ubicación: {payload.location}")
+
+    query_keywords = payload.query
+    if payload.extras:
+        query_keywords += " " + " ".join(payload.extras)
+
+    # ✅ SOLUCIÓN: Si hay max_travel_time pero no radius, establecer uno razonable
+    radius = payload.radius
+    if radius is None:
+        if payload.max_travel_time:
+            # Estimación: 10 min coche ≈ 5-10 km, 10 min walking ≈ 800m
+            if payload.travel_mode == "driving":
+                radius = payload.max_travel_time * 833  # ~50 km/h → 833 m/min
+            elif payload.travel_mode == "bicycling":
+                radius = payload.max_travel_time * 250  # ~15 km/h → 250 m/min
+            else:  # walking o transit
+                radius = payload.max_travel_time * 80   # ~5 km/h → 80 m/min
+        else:
+            radius = 5000  # Default 5km si no hay ninguna info
+
+    params = {
+        "query": query_keywords,
+        "location": location,
+        "radius": radius,  # ✅ Ahora siempre tiene un valor
         "key": GOOGLE_MAPS_API_KEY
     }
     if payload.price_level is not None:
