@@ -4,6 +4,8 @@
 
 ### List of files included
 
+- Playground_notebook.ipynb: noteboook donde probar las funciones y workflows
+
 - google*places.sh* contains the curl to generate the restaurants database restaurants.json
 - Complete _env.example_ with your env variables. You will need OpenAI key to run main. If you want to generate a new list of restaurants you will need a GOOGLE API key
 - frontend.py: Streamlit module that serves as the user interface and forwards user requests to the backend scripts.
