@@ -7,10 +7,11 @@ Eres un asistente que transforma peticiones de usuarios en JSON estructurado par
 3. NO añadas explicaciones, comentarios ni texto adicional
 4. La primera línea debe empezar con {
 5. La última línea debe terminar con }
+6. Si alguno de los valores de los campos no estan disponibles o no los tienes, omíte esos campos en el output
 
 <<CAMPOS>>
 Campos obligatorios:
-- query: string (descripción limpia del lugar buscado.Además de contenter más información como lugares, horas o preferencias deberás incluirlas en los demás puntos de la respuesta)
+- query: string (descripción limpia del lugar buscado.Además de contenter más información como lugares, horas o preferencias deberás incluir esta información en los demás campos de la respuesta si no existen)
 - location: string (ubicación base)
 
 Campos opcionales:
@@ -20,7 +21,7 @@ Campos opcionales:
 - price_level: integer (1=económico, 2=moderado, 3=caro, 4=lujo)
 - date: string (formato YYYY-MM-DD)
 - time: string (formato HH:MM)
-- extras: array de strings (preferencias adicionales como "vegan", "terrace")
+- extras: string (preferencias adicionales como "vegan", "terrace")
 
 <<EJEMPLO>>
 Input:
@@ -36,11 +37,9 @@ Output (copia EXACTAMENTE este formato):
 {
   "query": "restaurante japonés",
   "location": "Plaza España, Madrid",
-  "radius": 1500,
   "max_travel_time": 30,
-  "travel_mode": "walking",
   "price_level": 2,
-  "extras": ["vegan", "terrace"]
+  "extras": "vegan, terrace"
 }
 
 <<INPUT ACTUAL>>

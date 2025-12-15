@@ -358,6 +358,17 @@ def render_screen_1():
         if query or location:
             with st.spinner("Buscando restaurantes..."):
 
+                                # PREPARACIÓN CORRECTA DE FECHAS
+                # Convertimos los objetos de fecha/hora a string solo si existen en el session_state
+                date_str = ""
+                time_str = ""
+                
+                if st.session_state.selected_date:
+                    date_str = st.session_state.selected_date.strftime("%Y-%m-%d")
+                
+                if st.session_state.selected_time:
+                    time_str = st.session_state.selected_time.strftime("%H:%M")
+
                 # creamos diccionario con todos los inputs obtenidos
                 llm_inputs = {
                     "query": query,
@@ -366,8 +377,8 @@ def render_screen_1():
                     "mins": mins,
                     "travel_mode": travel_mode,
                     "price": price_options.get(price, 2),
-                    "col_date": str(col_date) if col_date else "",
-                    "col_time": str(col_time) if col_time else "",
+                    "col_date": date_str,
+                    "col_time": time_str,
                     "extras": [e.strip().lower() for e in extra_input.split(",")] if extra_input else [
                     ]
                 }

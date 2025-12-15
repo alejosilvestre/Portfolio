@@ -87,7 +87,7 @@ Retorna:
 
 Ejemplo de llamada desde otro módulo:
 
-    from module_name import call_llm
+    from first_input_llm import call_llm
 
 ### VARIABLES OBTENIDAS DESDE EL IMPUT DEL USUARIO A TRAVES DE STREAMLIT
    prompt_variables = {
@@ -132,18 +132,138 @@ import os
 import json
 from google import genai
 from dotenv import load_dotenv
+import re
 
 load_dotenv(".env")
 AI_STUDIO_API_KEY = os.environ.get("AI_STUDIO_API_KEY")
 client = genai.Client(api_key=AI_STUDIO_API_KEY)
 # cargamos el prompt desde un archivo externo
-with open("prompt_test.txt", "r", encoding="utf-8") as f:
+
+# with open("prompt_test.txt", "r", encoding="utf-8") as f:
+with open("prompt_first_LLM.txt", "r", encoding="utf-8") as f:
     prompt_template = f.read()
 
 
+def call_llm_not(prompt_variables: dict, prompt_template: str = None,
+             model: str = 'gemini-2.5-flash', parse_json: bool = False):
+
+    import json
+
+    # Cargar prompt base
+    prompt_base = prompt_template or globals().get("prompt_template", "")
+
+    # Construir bloque dinámico SOLO con los valores que existan
+    input_lines = []
+
+    def add(name, value):
+        if value not in [None, "", []]:
+            input_lines.append(f'  "{name}": "{value}"')
+
+    add("Usuario", prompt_variables.get("query"))
+    add("Ubicación", prompt_variables.get("location"))
+    add("Distancia máxima (metros)", prompt_variables.get("max_distance"))
+    add("Tiempo aproximado (minutos)", prompt_variables.get("mins"))
+    add("Modo de viaje", prompt_variables.get("travel_mode"))
+    add("Precio", prompt_variables.get("price"))
+    add("Fecha", prompt_variables.get("col_date"))
+    add("Hora", prompt_variables.get("col_time"))
+    add("Preferencias adicionales", prompt_variables.get("extras"))
+
+    input_block = ",\n".join(input_lines)
+
+    # Insertar en la plantilla
+    prompt = prompt_base.format(input_block=input_block)
+
+    # Llamada al modelo
+    try:
+        response = client.models.generate_content(
+            model=model,
+            contents=prompt
+        )
+    except Exception as e:
+        print("Error llamando al LLM:", e)
+        return {}
+
+    output_text = response.text.strip()
+
+    # Parsear JSON solo si se indica
+    if parse_json:
+        try:
+            # limpiar posibles ```json
+            if output_text.startswith("```"):
+                output_text = output_text.strip("` \n")
+                if output_text.startswith("json"):
+                    output_text = output_text[4:].strip()
+
+            return json.loads(output_text)
+
+        except Exception as e:
+            print("LLM no devolvió JSON válido:", output_text)
+            print("Error:", e)
+            return {}
+
+    return output_text
 
 
-def call_llm(prompt_template: str = None, prompt_variables: dict = None, 
+def call_llm(
+        prompt_template: str = None,
+        prompt_variables: dict = None,
+        model: str = 'gemini-2.5-flash',
+        parse_json: bool = False
+    ) -> str | dict:
+
+    prompt_base = prompt_template or globals().get("prompt_template", "")
+    prompt = prompt_base
+
+    # 1. Reemplazar variables existentes
+    if prompt_variables:
+        for key, value in prompt_variables.items():
+            if value is None or value == "" or value == "None":
+                # Eliminar completamente la línea JSON correspondiente
+                pattern = f'"{key}".*?\\n'
+                prompt = re.sub(pattern, "", prompt)
+            else:
+                prompt = prompt.replace(f"{{{key}}}", str(value))
+
+    # 2. Eliminar cualquier placeholder sobrante
+    prompt = re.sub(r"\{[a-zA-Z0-9_]+\}", "", prompt)
+
+    # 3. Quitar posibles dobles comas en JSON
+    prompt = prompt.replace(",\n}", "\n}")
+
+    try:
+        response = client.models.generate_content(
+            model=model,
+            contents=prompt
+        )
+    except Exception as e:
+        print("Error llamando al LLM:", e)
+        return {}
+
+    output_text = response.text.strip()
+
+    if parse_json:
+        try:
+            cleaned = output_text
+
+            # eliminar fences si los hubiera
+            if "```json" in cleaned:
+                cleaned = cleaned.split("```json")[1].split("```")[0]
+            elif "```" in cleaned:
+                cleaned = cleaned.split("```")[1].split("```")[0]
+
+            return json.loads(cleaned.strip())
+
+        except json.JSONDecodeError as e:
+            print("LLM output no es JSON válido:", output_text)
+            print("Error de parsing:", e)
+            return {}
+
+    return output_text
+
+
+
+def call_llm_ORIGINAL(prompt_template: str = None, prompt_variables: dict = None, 
              model: str = 'gemini-2.5-flash', parse_json: bool = False) -> str or dict:
     
     prompt_base = prompt_template or globals().get("prompt_template", "")
