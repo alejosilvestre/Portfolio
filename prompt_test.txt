@@ -7,53 +7,22 @@ Eres un asistente que transforma peticiones de usuarios en JSON estructurado par
 3. NO añadas explicaciones, comentarios ni texto adicional
 4. La primera línea debe empezar con {
 5. La última línea debe terminar con }
+6. Si un campo no tiene valor, NO LO INCLUYAS en el JSON final
 
 <<CAMPOS>>
-Campos obligatorios:
-- query: string (descripción limpia del lugar buscado)
-- location: string (ubicación base)
+Obligatorios:
+- query: string
+- location: string
 
-Campos opcionales:
-- radius: integer (distancia máxima en metros desde location)
-- max_travel_time: integer (tiempo máximo en minutos)
-- travel_mode: string (por defecto "walking")
-- price_level: integer (1=económico, 2=moderado, 3=caro, 4=lujo)
-- date: string (formato YYYY-MM-DD)
-- time: string (formato HH:MM)
-- extras: array de strings (preferencias adicionales como "vegan", "terrace")
-
-<<EJEMPLO>>
-Input:
-{
-  "Usuario": "Quiero un japonés para 4 personas esta noche, con terraza",
-  "Ubicación": "Plaza España, Madrid",
-  "Tiempo aproximado (minutos)": 30,
-  "Precio": "2",
-  "Preferencias adicionales": "opciones veganas y terraza"
-}
-
-Output (copia EXACTAMENTE este formato):
-{
-  "query": "restaurante japonés",
-  "location": "Plaza España, Madrid",
-  "radius": 1500,
-  "max_travel_time": 30,
-  "travel_mode": "walking",
-  "price_level": 2,
-  "extras": ["vegan", "terrace"]
-}
+Opcionales:
+- radius: integer
+- max_travel_time: integer
+- travel_mode: string
+- price_level: integer
+- date: string (YYYY-MM-DD)
+- time: string (HH:MM)
+- extras: string
 
 <<INPUT ACTUAL>>
-{
-  "Usuario": "{query}",
-  "Ubicación": "{location}",
-  "Distancia máxima (metros)": {max_distance},
-  "Tiempo aproximado (minutos)": {mins},
-  "Modo de viaje": "{travel_mode}",
-  "Precio": "{price}",
-  "Fecha": "{col_date}",
-  "Hora": "{col_time}",
-  "Preferencias adicionales": "{extras}"
-}
+{input_block}
 
-Responde SOLO con el JSON (sin ```json):

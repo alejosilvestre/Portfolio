@@ -12,3 +12,6 @@ uvicorn
 joblib
 pydantic
 streamlit
+#local
+ollama==0.6.1
+google-genai==1.53.0
