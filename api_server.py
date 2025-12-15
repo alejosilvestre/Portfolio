@@ -9,6 +9,7 @@ from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List, Any, Dict
 from datetime import datetime, date, time, timedelta
 import uuid
+import random
 
 # ==================== MODELOS ====================
 
@@ -302,7 +303,8 @@ async def list_shifts(
 )
 async def check_availability(
     query: AvailabilityQuery,
-    x_api_key: str = Header(..., alias="x-api-key")
+    x_api_key: str = Header(..., alias="x-api-key"),
+    max_slots: int = Query(default=3, ge=1, le=20, description="Máximo de slots a devolver")
 ):
     """Consultar disponibilidad de un restaurante"""
     verify_api_key(x_api_key)
@@ -335,7 +337,15 @@ async def check_availability(
             
             current = current + timedelta(minutes=30)
     
-    return available_slots
+    truly_available = [slot for slot in available_slots if slot.available]
+    
+    random_available_slots = random.sample(
+        truly_available, 
+        min(max_slots, len(truly_available))
+    )
+    random_available_slots.sort(key=lambda slot: slot.slot_time)
+
+    return random_available_slots
 
 # ==================== RESERVAS ====================
 
