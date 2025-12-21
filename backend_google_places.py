@@ -159,40 +159,67 @@ def geocode_location(location: str) -> Optional[str]:
     """
     Convierte un string de ubicación en lat,lng usando Place Autocomplete + Place Details
     para obtener coordenadas precisas.
+    
+    MEJORADO: Ahora busca primero en (regions) para ciudades, y si falla, en geocode directo.
     """
-    # ---------------- Autocomplete ----------------
+    
+    # ============================================================
+    # MÉTODO 1: Usar Place Autocomplete con types=(regions)
+    # Mejor para ciudades, pueblos, barrios
+    # ============================================================
     autocomplete_url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
     autocomplete_params = {
         "input": location,
-        "types": "address",
+        "types": "(regions)",  # ✅ CAMBIO: Ahora busca regiones (ciudades, pueblos)
         "key": GOOGLE_MAPS_API_KEY
     }
     r = requests.get(autocomplete_url, params=autocomplete_params)
     r.raise_for_status()
     data = r.json()
+    
+    # Si encuentra resultados con (regions)
+    if data.get("predictions"):
+        place_id = data["predictions"][0]["place_id"]
+        
+        # Obtener detalles del lugar
+        details_url = "https://maps.googleapis.com/maps/api/place/details/json"
+        details_params = {
+            "place_id": place_id,
+            "fields": "geometry,formatted_address",
+            "key": GOOGLE_MAPS_API_KEY
+        }
+        r2 = requests.get(details_url, params=details_params)
+        r2.raise_for_status()
+        details = r2.json()
+        
+        location_data = details.get("result", {}).get("geometry", {}).get("location")
+        if location_data:
+            coords = f"{location_data.get('lat')},{location_data.get('lng')}"
 
-    if not data.get("predictions"):
-        return None
+            return coords
+    
+    # ============================================================
+    # MÉTODO 2: Fallback a Geocoding API directo
+    # Si el autocomplete no encuentra nada, usar geocoding directo
+    # ============================================================
 
-    # Tomamos la primera predicción
-    place_id = data["predictions"][0]["place_id"]
-
-    # ---------------- Place Details ----------------
-    details_url = "https://maps.googleapis.com/maps/api/place/details/json"
-    details_params = {
-        "place_id": place_id,
-        "fields": "geometry",
+    geocode_url = "https://maps.googleapis.com/maps/api/geocode/json"
+    geocode_params = {
+        "address": location,
         "key": GOOGLE_MAPS_API_KEY
     }
-    r2 = requests.get(details_url, params=details_params)
-    r2.raise_for_status()
-    details = r2.json()
+    r3 = requests.get(geocode_url, params=geocode_params)
+    r3.raise_for_status()
+    geocode_data = r3.json()
+    
+    if geocode_data.get("results"):
+        location_data = geocode_data["results"][0]["geometry"]["location"]
+        coords = f"{location_data.get('lat')},{location_data.get('lng')}"
 
-    location_data = details.get("result", {}).get("geometry", {}).get("location")
-    if location_data:
-        return f"{location_data.get('lat')},{location_data.get('lng')}"
+        return coords
+    
+    print(f"❌ No se pudo geocodificar '{location}'")
     return None
-
 
 
 def extract_neighborhood(address_components: List[Dict[str, Any]]) -> Optional[str]:
