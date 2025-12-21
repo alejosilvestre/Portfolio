@@ -86,6 +86,7 @@ class RestaurantCandidate(BaseModel):
     name: str
     address: str
     rating: Optional[float] = None
+    user_ratings_total: Optional[int] = None
     price_level: Optional[int] = None
     phone: Optional[str] = None
     website: Optional[str] = None
