@@ -120,14 +120,15 @@ def verify_api_key(x_api_key: str = Header(..., alias="x-api-key", description="
 # ==================== APP ====================
 
 app = FastAPI(
-    title="CoverManager API Mock",
+    title="ReserveHub API",  # ✅ Nuevo nombre
     description="""
-    ## API de CovManager para TFM
+    ## API de ReserveHub para Gestión de Reservas
     
-    Esta API proporciona funcionalidad básica de gestión de reservas para restaurantes.
+    Sistema multi-agente para gestión inteligente de reservas en restaurantes.
+    Desarrollado como TFM - Master en IA Generativa.
     
     ### Características:
-    * 🏪 Gestión de restaurantes (venues)
+    * 🏪 Gestión de locales (venues)
     * ⏰ Gestión de turnos (shifts)
     * 📅 Consulta de disponibilidad
     * 📝 CRUD completo de reservas
@@ -136,20 +137,11 @@ app = FastAPI(
     Todas las peticiones requieren un header `x-api-key` con una API key válida.
     
     **API Key de prueba**: `demo-api-key`
-    
-    ### Estados de Reserva:
-    * `confirmed` - Reserva confirmada
-    * `seated` - Cliente sentado en la mesa
-    * `cancelled` - Reserva cancelada
-    * `no_show` - Cliente no se presentó
     """,
-    version="2.0.0",
+    version="1.0.0",
     contact={
-        "name": "Soporte API",
-        "email": "ebis@ebis.com"
-    },
-    license_info={
-        "name": "MIT License",
+        "name": "TFM - Sistema Reservas IA",
+        "email": "tu_email@estudiante.com"
     }
 )
 
