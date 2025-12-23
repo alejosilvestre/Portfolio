@@ -211,6 +211,7 @@ __marimo__/
 .env
 .venv
 playground.ipynb
+Playground_notebook.ipynb
 frontend_streamlit_test.py
 utilities.py
 streamlit_test_2.py
