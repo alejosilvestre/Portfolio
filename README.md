@@ -33,6 +33,9 @@ genai-tfm/
 ├── frontend/                       # User interface
 │   ├── frontend.py                # Streamlit UI
 │   └── logo.jpeg                  # UI assets
+|
+├── Playground_arena/                        # Testing area
+│   ├── playground_arena_notebook.ipynb       # Testing funcion google places
 │
 ├── logs/                           # Execution logs
 │
