@@ -1,20 +1,80 @@
-# genai-tfc
+# genai-tfm
 
-## Final master project for Generative AI
+## Final Master Project - Generative AI
 
-### List of files included
+### 🤖 Intelligent Restaurant Reservation Agent
 
-- Playground_notebook.ipynb: noteboook donde probar las funciones y workflows
+An autonomous agent built with LangGraph that searches restaurants, checks availability, and makes reservations using natural language.
 
-- google*places.sh* contains the curl to generate the restaurants database restaurants.json
-- Complete _env.example_ with your env variables. You will need OpenAI key to run main. If you want to generate a new list of restaurants you will need a GOOGLE API key
-- frontend.py: Streamlit module that serves as the user interface and forwards user requests to the backend scripts.
-- backend_google_places_api.py: Module that implements the logic for interacting with the Google Places API (Text Search). It includes:1.The search payload structure (PlaceSearchPayload),2.The function that performs the actual Text Search request (places_text_search)
-- first_input_llm.py: Contains the functions required to generate the structured initial message sent to the LLM. It: 1.Preprocesses the user’s input, 2.Constructs and cleans the JSON-formatted message needed to pass to the Google Places API functions for restaurant search
+**Key Features:**
+- Natural language understanding (extracts location, date, time, people from conversation)
+- Intelligent TOP 3 ranking with LLM reasoning
+- Automatic fallback: API → Phone call if needed
+- Human-in-the-Loop for critical decisions
+
+---
+
+## 📁 Project Structure
+```
+genai-tfm/
+│
+├── agent/                          # Core agent system (LangGraph + ReAct)
+│   ├── agent_state.py             # State management and data models
+│   ├── agent_prompts.py           # LLM prompts and templates
+│   ├── agent_tools.py             # External tools (Google Places, APIs)
+│   ├── agent_nodes.py             # 12 intelligence nodes
+│   ├── agent_graph.py             # LangGraph orchestration
+│   └── agent_main.py              # Agent execution module
+│
+├── FastAPI/                        # API backend
+│   ├── api_server.py              # FastAPI server
+│   └── test_api.py                # API tests
+│
+├── frontend/                       # User interface
+│   ├── frontend.py                # Streamlit UI
+│   └── logo.jpeg                  # UI assets
+|
+├── Playground_arena/                        # Testing area
+│   ├── playground_arena_notebook.ipynb       # Testing funcion google places
+│
+├── logs/                           # Execution logs
+│
+├── .env                            # Environment variables (API keys)
+├── .env.example                    # Environment template
+├── .gitignore                      # Git ignore rules
+├── backend_google_places.py        # Google Places API integration
+├── main.py                         # Legacy entry point
+├── Playground_notebook.ipynb       # Development notebook with examples of use
+├── README.md                       # Project documentation
+├── requirements.txt                # Python dependencies
+├── run.py                          # Main entry point for agent
+
+```
+
+---
+
+## 🚀 Quick Start
+
+---
 
 
-### How to run the code
+### 1. Run the agent in the terminal
 
-- Execute main.py
-- Get response on console
-- See logs on LangSmith - EU cluster
+**TERMINAL MODE Interactive mode (chat):**
+```bash
+python run.py --mode interactive
+```
+
+
+
+**UNTESTED Test mode (automated):**
+```bash
+python run.py --mode test
+```
+
+**UNTESTED Specific test case:**
+```bash
+python run.py --mode test --test-case complete
+```
+
+---
