@@ -211,10 +211,10 @@ __marimo__/
 .env
 .venv
 playground.ipynb
-Playground_notebook.ipynb
 frontend_streamlit_test.py
 utilities.py
 streamlit_test_2.py
 first_input_llm.py
 prompt_first_LLM.txt
 prompt_test.txt
+/DROP/
