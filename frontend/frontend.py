@@ -1,7 +1,27 @@
+import sys
+from pathlib import Path
+
+# Agregar el directorio raíz del proyecto al path
+root_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(root_dir))
+
 import streamlit as st
+import requests
+import json
+from typing import Dict, List, Any, Optional
 import time
 import base64
 from datetime import datetime, time as dt_time
+
+from frontend_api_helpers import (
+    search_restaurants_via_agent,
+    process_agent_response_for_ui,
+    continue_agent_conversation
+)
+
+# NUEVO - Constantes de configuración
+API_BASE_URL = "http://localhost:8000"
+API_KEY = "demo-api-key"
 
 # ==========================================
 # CONFIGURACIÓN DE PÁGINA
@@ -10,8 +30,8 @@ st.set_page_config(layout="wide", page_title="FoodLooker", page_icon="🍽️")
 
 # imports propios
 
-from backend_google_places import PlaceSearchPayload, places_text_search
-from first_input_llm import call_llm
+from backend.backend_google_places import PlaceSearchPayload, places_text_search
+# from agent.agent_nodes import call_llm
 
 
 # ==========================================
@@ -352,65 +372,105 @@ def render_screen_1():
             extra_input = st.text_input("Extras", placeholder="Ej: Vegano, solo terraza, celiaco...", label_visibility="collapsed")
 
     # ==========================================
-    # LÓGICA DE BÚSQUEDA
+    # LÓGICA DE BÚSQUEDA MODIFICADA
     # ==========================================
     if search_clicked:
         if query or location:
-            with st.spinner("Buscando restaurantes..."):
-
-                                # PREPARACIÓN CORRECTA DE FECHAS
-                # Convertimos los objetos de fecha/hora a string solo si existen en el session_state
-                date_str = ""
-                time_str = ""
+            with st.spinner("🤖 El agente está buscando los mejores restaurantes para ti..."):
+                
+                # PREPARACIÓN CORRECTA DE FECHAS
+                date_obj = None
+                time_obj = None
+                mins_to_wait = None
                 
                 if st.session_state.selected_date:
-                    date_str = st.session_state.selected_date.strftime("%Y-%m-%d")
+                    date_obj = st.session_state.selected_date
                 
                 if st.session_state.selected_time:
-                    time_str = st.session_state.selected_time.strftime("%H:%M")
-
-                # creamos diccionario con todos los inputs obtenidos
-                llm_inputs = {
-                    "query": query,
-                    "location": location,
-                    "max_distance": max_distance,
-                    "mins": mins,
-                    "travel_mode": travel_mode,
-                    "price": price_options.get(price, 2),
-                    "col_date": date_str,
-                    "col_time": time_str,
-                    "extras": [e.strip().lower() for e in extra_input.split(",")] if extra_input else [
-                    ]
-                }
-
-                # Llamada al LLM
-                llm_response = call_llm(
-                    prompt_variables=llm_inputs,
-                    parse_json=True
-                )
-
-                # Respuesta a api de Google Places
-                google_places_payload = PlaceSearchPayload(**llm_response)
-                resultados = places_text_search(google_places_payload)
+                    time_obj = st.session_state.selected_time
                 
-                # Procesamos resultados para la UI filtrando los primeros 3 resultados y mostrando:
-                # Nombre, Zona, Precio, y rating
-                processed = []
-                for i, p in enumerate(resultados):
-                    processed.append({
-                        "id": i + 1,
-                        "name": p.get("name"),
-                        "area": p.get("neighborhood"),
-                        "price": p.get("price_level"),
-                        "rating": p.get("rating")
-                    })
-                    if i >= 2:
-                        break  # Solo los primeros 3
-
-
-                st.session_state.results = processed
-                st.session_state.step = 2
-                st.rerun()
+                # Si no hay fecha específica, usar los minutos del slider
+                if not date_obj:
+                    mins_to_wait = mins
+                
+                # ✅ LLAMADA AL API SERVER EN VEZ DE call_llm
+                # Importar la función helper
+                from frontend_api_helpers import search_restaurants_via_agent, process_agent_response_for_ui
+                
+                # Llamar al agente a través del API
+                agent_response = search_restaurants_via_agent(
+                    user_query=query,
+                    location=location,
+                    party_size=4,  # Puedes añadir un campo en el frontend para esto
+                    selected_date=date_obj,
+                    selected_time=time_obj,
+                    mins=mins_to_wait,
+                    travel_mode=travel_mode,
+                    max_distance=max_distance,
+                    price_level=price_options.get(price, 2),
+                    extras=extra_input
+                )
+                
+                # Verificar el estado de la respuesta
+                status = agent_response.get("status")
+                
+                if status == "success":
+                    # ✅ ÉXITO - Procesar los restaurantes
+                    processed_results = process_agent_response_for_ui(agent_response)
+                    
+                    if processed_results:
+                        st.session_state.results = processed_results
+                        st.session_state.step = 2
+                        st.success("¡Encontrados! El agente ha seleccionado los mejores restaurantes.")
+                        time.sleep(0.5)
+                        st.rerun()
+                    else:
+                        st.warning("El agente no encontró restaurantes que coincidan con tus criterios.")
+                        st.info(agent_response.get("message", "Intenta con criterios diferentes."))
+                
+                elif status == "needs_input":
+                    # 🔄 EL AGENTE NECESITA MÁS INFORMACIÓN
+                    agent_question = agent_response.get("question", agent_response.get("message"))
+                    session_id = agent_response.get("session_id")
+                    
+                    st.warning("El agente necesita más información:")
+                    st.info(agent_question)
+                    
+                    # Mostrar campo para que el usuario responda
+                    user_answer = st.text_input("Tu respuesta:", key="agent_followup")
+                    
+                    if st.button("Enviar respuesta al agente"):
+                        # Continuar la conversación con el agente
+                        from frontend_api_helpers import continue_agent_conversation
+                        
+                        follow_up_response = continue_agent_conversation(
+                            session_id=session_id,
+                            user_response=user_answer
+                        )
+                        
+                        # Procesar la nueva respuesta (recursivamente)
+                        # Este flujo se puede mejorar guardando el estado en session_state
+                        st.rerun()
+                
+                elif status == "failed":
+                    # ❌ ERROR
+                    error_message = agent_response.get("message", "Error desconocido")
+                    st.error(f"❌ {error_message}")
+                    
+                    # Mostrar sugerencias si las hay
+                    suggestions = agent_response.get("alternative_suggestions", [])
+                    if suggestions:
+                        st.info("💡 Sugerencias:")
+                        for suggestion in suggestions:
+                            st.write(f"- {suggestion}")
+                
+                else:
+                    # Estado desconocido
+                    st.warning("Respuesta inesperada del agente. Intenta de nuevo.")
+                    st.json(agent_response)  # Para debugging
+        
+        else:
+            st.warning("Por favor, ingresa al menos una consulta o ubicación.")
 
 # ==========================================
 # PANTALLA 2: RESULTADOS

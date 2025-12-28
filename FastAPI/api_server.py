@@ -1,8 +1,12 @@
+from __future__ import annotations
 """
 CoverManager API Mock - OpenAPI 3.0.3 100% Compatible
 Post-procesamiento del esquema para Swagger Editor
 """
-from __future__ import annotations
+import sys
+from pathlib import Path as FilePath
+
+
 from fastapi import FastAPI, HTTPException, Header, Query, Path
 from fastapi.openapi.utils import get_openapi
 from pydantic import BaseModel, EmailStr, Field
@@ -10,6 +14,11 @@ from typing import Optional, List, Any, Dict
 from datetime import datetime, date, time, timedelta
 import uuid
 import random
+
+ROOT_DIR = FilePath(__file__).parent.parent
+sys.path.insert(0, str(ROOT_DIR))
+
+from agent.agent_main import RestaurantBookingAgent
 
 # ==================== MODELOS ====================
 
@@ -74,6 +83,14 @@ class ErrorResponse(BaseModel):
     """Respuesta de error estándar"""
     detail: str = Field(..., description="Descripción del error", example="Venue not found")
 
+class AgentReservationRequest(BaseModel):
+    user_id: str
+    session_context: Dict[str, Any] = {}
+    ranked_restaurants: List[Dict[str, Any]] = []
+    
+    class Config:
+        extra = "allow"
+
 # ==================== BASE DE DATOS ====================
 
 class SimpleDB:
@@ -103,6 +120,19 @@ class SimpleDB:
             self.shifts[shift.id] = shift
 
 db = SimpleDB()
+
+# ==================== AGENTE ====================
+
+booking_agent = None
+
+def get_agent():
+    """Obtiene o crea la instancia del agente"""
+    global booking_agent
+    if booking_agent is None:
+        print("🤖 Inicializando Agente de Reservas...")
+        booking_agent = RestaurantBookingAgent()
+        print("✓ Agente listo\n")
+    return booking_agent
 
 # ==================== AUTENTICACIÓN ====================
 
@@ -466,6 +496,211 @@ async def update_reservation(
     reservation.updated_at = datetime.now()
     
     return reservation
+
+# 4. ENDPOINT COMPLETO (antes de MAIN, línea ~499)
+
+@app.post("/api/reservation-requests",
+    tags=["Agente de Reservas"],
+    summary="Gestionar reserva con agente LangGraph",
+    responses={
+        200: {"description": "Resultado del proceso de reserva"},
+        400: {"model": ErrorResponse, "description": "Request inválido"}
+    }
+)
+async def create_reservation_request(request: AgentReservationRequest):
+    """
+    Endpoint que delega al agente de LangGraph para gestionar la reserva.
+    """
+    
+    print("\n" + "="*60)
+    print("📦 REQUEST RECIBIDO DEL FRONTEND")
+    print("="*60)
+    print(f"👤 Usuario: {request.user_id}")
+    print(f"🍽️  Restaurantes: {len(request.ranked_restaurants)}")
+    for idx, r in enumerate(request.ranked_restaurants):
+        print(f"   {idx + 1}. {r.get('name', 'Sin nombre')} - {r.get('area', 'N/A')}")
+    print("="*60 + "\n")
+    
+    try:
+        # Obtener instancia del agente
+        agent = get_agent()
+        
+        # Construir mensaje para el agente basado en el contexto
+        context = request.session_context
+        user_message = _build_agent_message(context, request.ranked_restaurants)
+        
+        print(f"💬 Mensaje al agente: {user_message}\n")
+        
+        # Ejecutar agente
+        print("🤖 Procesando con agente LangGraph...")
+        response = agent.start_conversation(user_message)
+        
+        print(f"✓ Agente respondió: {response[:100]}...\n")
+        
+        # Obtener estado del agente
+        status = agent.get_conversation_status()
+        
+        print(f"📊 Estado del agente: {status['status']}")
+        print(f"   Booking status: {status.get('booking_status', 'N/A')}")
+        print(f"   Necesita input: {status.get('needs_user_input', False)}\n")
+        
+        # Convertir respuesta del agente a formato del frontend
+        result = _convert_agent_response_to_api_format(
+            agent_response=response,
+            agent_status=status,
+            agent_state=agent.state,
+            request_data=request
+        )
+        
+        # Resetear agente para siguiente request
+        agent.reset()
+        
+        print("="*60)
+        print(f"✓ Respuesta enviada al frontend: {result['status']}")
+        print("="*60 + "\n")
+        
+        return result
+    
+    except Exception as e:
+        print(f"❌ Error en el agente: {str(e)}\n")
+        import traceback
+        traceback.print_exc()
+        
+        return {
+            "status": "failed",
+            "message": f"Error procesando la reserva: {str(e)}",
+            "attempts": [],
+            "alternative_suggestions": []
+        }
+
+
+def _build_agent_message(context: dict, restaurants: list) -> str:
+    """
+    Construye el mensaje para el agente basado en el contexto y restaurantes.
+    """
+    parts = []
+    
+    # Query original si existe
+    if context.get("original_query"):
+        parts.append(context["original_query"])
+    else:
+        # Construir query a partir de los datos
+        query_parts = ["Quiero reservar"]
+        
+        if context.get("party_size"):
+            query_parts.append(f"para {context['party_size']} personas")
+        
+        if context.get("date"):
+            query_parts.append(f"el {context['date']}")
+        
+        if context.get("time"):
+            query_parts.append(f"a las {context['time']}")
+        
+        if context.get("location"):
+            query_parts.append(f"en {context['location']}")
+        
+        parts.append(" ".join(query_parts))
+    
+    # Añadir preferencias de restaurantes si las hay
+    if restaurants:
+        restaurant_names = [r.get("name", "N/A") for r in restaurants[:3]]
+        parts.append(f"Mis opciones preferidas son: {', '.join(restaurant_names)}")
+    
+    return ". ".join(parts)
+
+
+def _convert_agent_response_to_api_format(
+    agent_response: str,
+    agent_status: dict,
+    agent_state: dict,
+    request_data: AgentReservationRequest
+) -> dict:
+    """
+    Convierte la respuesta del agente al formato que espera el frontend.
+    """
+    
+    # Verificar si el agente completó exitosamente
+    booking_status = agent_status.get("booking_status")
+    
+    if booking_status == "confirmed":
+        # ✅ ÉXITO - Extraer información de la reserva
+        
+        # Buscar información de la reserva en el estado del agente
+        booking_info = agent_state.get("booking_confirmation", {})
+        context = request_data.session_context
+        
+        # Determinar qué restaurante se reservó
+        # (el agente debería incluir esto en booking_confirmation)
+        restaurant_name = booking_info.get("restaurant_name")
+        if not restaurant_name and request_data.ranked_restaurants:
+            restaurant_name = request_data.ranked_restaurants[0].get("name", "Restaurante")
+        
+        # Crear reserva real en la base de datos
+        reservation_date_str = context.get("date") or datetime.now().date().isoformat()
+        reservation_time_str = context.get("time") or "21:00"
+        
+        try:
+            reservation_date = datetime.strptime(reservation_date_str, "%Y-%m-%d").date()
+            reservation_time = datetime.strptime(reservation_time_str, "%H:%M").time()
+        except:
+            reservation_date = datetime.now().date()
+            reservation_time = time(21, 0)
+        
+        new_reservation = Reservation(
+            id=str(uuid.uuid4()),
+            venue_id=booking_info.get("venue_id", "venue-agent"),
+            reservation_date=reservation_date,
+            reservation_time=reservation_time,
+            party_size=context.get("party_size", 2),
+            status="confirmed",
+            name=request_data.user_id,
+            phone=booking_info.get("phone", "+34666000000"),
+            email=booking_info.get("email", "user@example.com"),
+            notes=f"Reserva gestionada por agente. {agent_response[:100]}",
+            shift_id="shift-2",
+            created_at=datetime.now(),
+            updated_at=datetime.now()
+        )
+        
+        db.reservations[new_reservation.id] = new_reservation
+        
+        return {
+            "status": "success",
+            "reservation": {
+                "id": new_reservation.id,
+                "restaurant": restaurant_name,
+                "date": reservation_date.isoformat(),
+                "time": reservation_time.isoformat(),
+                "party_size": context.get("party_size", 2),
+                "method": booking_info.get("method", "api")
+            },
+            "attempts": [{
+                "restaurant": restaurant_name,
+                "success": True,
+                "message": "Reserva confirmada por el agente"
+            }],
+            "agent_response": agent_response
+        }
+    
+    elif agent_status.get("needs_user_input"):
+        # 🔄 NECESITA MÁS INFORMACIÓN
+        return {
+            "status": "needs_input",
+            "message": agent_response,
+            "question": agent_response,
+            "session_id": agent_status.get("session_id")  # Para continuar la conversación
+        }
+    
+    else:
+        # ❌ FALLO O NO COMPLETADO
+        return {
+            "status": "failed",
+            "message": agent_response or "No se pudo completar la reserva",
+            "attempts": [],
+            "alternative_suggestions": [],
+            "agent_response": agent_response
+        }
+
 
 @app.delete("/api/reservations/{reservation_id}",
     tags=["Reservas"],

@@ -34,7 +34,7 @@ from datetime import datetime, timedelta
 import json
 
 # Modulo Google places API
-from backend_google_places import PlaceSearchPayload, places_text_search
+from backend.backend_google_places import PlaceSearchPayload, places_text_search
 
 
 # ===========================================================
