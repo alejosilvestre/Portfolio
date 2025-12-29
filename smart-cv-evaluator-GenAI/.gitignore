@@ -1,0 +1,8 @@
+.env
+.stremlit
+.streamlit_aws
+.deepeval
+.config
+.core
+.evaluation
+.models

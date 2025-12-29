@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Evaluator - Mapa Conceptual del Sistema</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e8e8e8;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8892b0;
+            font-weight: 300;
+        }
+        
+        .diagram-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .diagram-section h2 {
+            font-size: 1.5rem;
+            color: #00d9ff;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+        }
+        
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+        
+        .legend-item.langchain { border-left-color: #00ff88; }
+        .legend-item.langsmith { border-left-color: #ff6b6b; }
+        .legend-item.deepeval { border-left-color: #ffd93d; }
+        .legend-item.output { border-left-color: #6bcbff; }
+        
+        .legend-item .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .legend-item.langchain .icon { background: rgba(0, 255, 136, 0.2); }
+        .legend-item.langsmith .icon { background: rgba(255, 107, 107, 0.2); }
+        .legend-item.deepeval .icon { background: rgba(255, 217, 61, 0.2); }
+        .legend-item.output .icon { background: rgba(107, 203, 255, 0.2); }
+        
+        .legend-item h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .legend-item p {
+            font-size: 0.8rem;
+            color: #8892b0;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .metric-card h3 {
+            font-size: 1rem;
+            color: #ffd93d;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .metric-card p {
+            font-size: 0.85rem;
+            color: #a8b2d1;
+            line-height: 1.6;
+        }
+        
+        .metric-card .threshold {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 12px;
+            background: rgba(0, 217, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #00d9ff;
+            font-weight: 500;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #5a6a8a;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 CV Evaluator System</h1>
+            <p class="subtitle">Mapa Conceptual del Sistema de Evaluación de Candidatos con IA</p>
+        </header>
+
+        <!-- Diagrama Principal del Flujo -->
+        <section class="diagram-section">
+            <h2>📊 Flujo Principal del Sistema</h2>
+            <div class="mermaid">
+flowchart TB
+    subgraph INPUTS[INPUTS]
+        OF[Oferta de Trabajo]
+        CV[CV del Candidato]
+    end
+
+    subgraph FASE1[FASE 1: Evaluacion Automatica]
+        EXT[1. Extraccion de Requisitos]
+        MATCH[2. Matching CV-Requisitos]
+        SCORE[3. Calculo de Score]
+    end
+
+    subgraph DECISION[Decision]
+        CHECK{Descartado?}
+        VERIFY{Requisitos pendientes?}
+    end
+
+    subgraph FASE2[FASE 2: Entrevista]
+        GEN[4. Generar Preguntas]
+        ASK[5. Preguntar al Candidato]
+        PROC[6. Procesar Respuestas]
+        UPDATE[7. Actualizar Evaluacion]
+    end
+
+    subgraph OUTPUT[OUTPUT]
+        RESULT[EvaluationResult JSON]
+    end
+
+    OF --> EXT
+    CV --> MATCH
+    EXT --> MATCH
+    MATCH --> SCORE
+    SCORE --> CHECK
+    
+    CHECK -->|Si| RESULT
+    CHECK -->|No| VERIFY
+    
+    VERIFY -->|Si| GEN
+    VERIFY -->|No| RESULT
+    
+    GEN --> ASK
+    ASK --> PROC
+    PROC --> UPDATE
+    UPDATE --> RESULT
+
+    style INPUTS fill:#1e3a5f,stroke:#00d9ff,stroke-width:2px
+    style FASE1 fill:#1a4d2e,stroke:#00ff88,stroke-width:2px
+    style DECISION fill:#4a3728,stroke:#ffa500,stroke-width:2px
+    style FASE2 fill:#3d1a4d,stroke:#ff6bff,stroke-width:2px
+    style OUTPUT fill:#1e3a5f,stroke:#6bcbff,stroke-width:2px
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item langchain">
+                    <div class="icon">🔗</div>
+                    <div>
+                        <h4>LangChain</h4>
+                        <p>Orquestación de LLM y prompts</p>
+                    </div>
+                </div>
+                <div class="legend-item langsmith">
+                    <div class="icon">📡</div>
+                    <div>
+                        <h4>LangSmith</h4>
+                        <p>Tracking de todas las ejecuciones</p>
+                    </div>
+                </div>
+                <div class="legend-item deepeval">
+                    <div class="icon">✅</div>
+                    <div>
+                        <h4>DeepEval</h4>
+                        <p>Evaluación de calidad del sistema</p>
+                    </div>
+                </div>
+                <div class="legend-item output">
+                    <div class="icon">📊</div>
+                    <div>
+                        <h4>Confident AI</h4>
+                        <p>Dashboard de métricas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diagrama de Capas -->
+        <section class="diagram-section">
+            <h2>🏗️ Arquitectura por Capas</h2>
+            <div class="mermaid">
+flowchart TB
+    subgraph UI[CAPA DE PRESENTACION]
+        APP[Streamlit App]
+    end
+
+    subgraph CORE[CAPA DE NEGOCIO]
+        EVAL[evaluator.py]
+        INT[interviewer.py]
+    end
+
+    subgraph LLM[CAPA LLM]
+        LC[LangChain + ChatOpenAI]
+        SO[Structured Output]
+    end
+
+    subgraph TRACKING[CAPA DE OBSERVABILIDAD]
+        LS[LangSmith - Traces]
+        DE[DeepEval - Metrics]
+        CA[Confident AI - Dashboard]
+    end
+
+    subgraph DATA[CAPA DE DATOS]
+        MOD[Pydantic Models]
+        CFG[Config settings.py]
+    end
+
+    APP --> EVAL
+    APP --> INT
+    EVAL --> LC
+    INT --> LC
+    LC --> SO
+    SO --> MOD
+    
+    LC -.-> LS
+    EVAL -.-> DE
+    INT -.-> DE
+    DE -.-> CA
+    
+    CFG --> LC
+    CFG --> DE
+
+    style UI fill:#2d4a6f,stroke:#00d9ff,stroke-width:2px
+    style CORE fill:#1a4d2e,stroke:#00ff88,stroke-width:2px
+    style LLM fill:#4a3d1a,stroke:#ffd93d,stroke-width:2px
+    style TRACKING fill:#4a1a3d,stroke:#ff6b6b,stroke-width:2px
+    style DATA fill:#3d3d3d,stroke:#888,stroke-width:2px
+            </div>
+        </section>
+
+        <!-- Métricas de Evaluación -->
+        <section class="diagram-section">
+            <h2>📏 Métricas de Evaluación (DeepEval)</h2>
+            
+            <div class="mermaid">
+flowchart LR
+    subgraph F1[FASE 1 - Evaluador]
+        M1[requirement_extraction]
+        M2[cv_faithfulness]
+        M3[evaluation_hallucination]
+    end
+
+    subgraph F2[FASE 2 - Entrevista]
+        M4[interview_completeness]
+        M5[interview_faithfulness]
+        M6[interview_hallucination]
+    end
+
+    subgraph EVAL[GEval LLM-as-Judge]
+        GPT[GPT-4 evalua actual vs expected]
+    end
+
+    M1 --> GPT
+    M2 --> GPT
+    M3 --> GPT
+    M4 --> GPT
+    M5 --> GPT
+    M6 --> GPT
+
+    GPT --> SCORE[Score 0.0 - 1.0]
+    SCORE --> PASS{Mayor que threshold?}
+    PASS -->|Si| OK[PASS]
+    PASS -->|No| FAIL[FAIL]
+
+    style F1 fill:#1a4d2e,stroke:#00ff88,stroke-width:2px
+    style F2 fill:#3d1a4d,stroke:#ff6bff,stroke-width:2px
+    style EVAL fill:#4a3d1a,stroke:#ffd93d,stroke-width:2px
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>📋 requirement_extraction_correctness</h3>
+                    <p>Evalúa si el sistema extrajo correctamente todos los requisitos de la oferta y los clasificó bien como obligatorios u opcionales.</p>
+                    <span class="threshold">Threshold: 0.5</span>
+                </div>
+                <div class="metric-card">
+                    <h3>✓ cv_faithfulness</h3>
+                    <p>Verifica que cada requisito marcado como "cumplido" está realmente evidenciado en el CV del candidato.</p>
+                    <span class="threshold">Threshold: 0.5</span>
+                </div>
+                <div class="metric-card">
+                    <h3>🚫 evaluation_hallucination</h3>
+                    <p>Detecta si el sistema inventó información que no existe en los documentos de entrada (oferta o CV).</p>
+                    <span class="threshold">Threshold: 0.8</span>
+                </div>
+                <div class="metric-card">
+                    <h3>📝 interview_completeness</h3>
+                    <p>Evalúa si se preguntó por todos los requisitos pendientes de verificación con preguntas claras y específicas.</p>
+                    <span class="threshold">Threshold: 0.8</span>
+                </div>
+                <div class="metric-card">
+                    <h3>🎯 interview_faithfulness</h3>
+                    <p>Verifica que el resultado final es coherente con las respuestas que dio el candidato durante la entrevista.</p>
+                    <span class="threshold">Threshold: 0.8</span>
+                </div>
+                <div class="metric-card">
+                    <h3>⚠️ interview_hallucination</h3>
+                    <p>Detecta si el sistema inventó confirmaciones o negaciones que el candidato no dio en sus respuestas.</p>
+                    <span class="threshold">Threshold: 0.8</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>CV Evaluator System - Documentación Técnica</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1e3a5f',
+                primaryTextColor: '#e8e8e8',
+                primaryBorderColor: '#00d9ff',
+                lineColor: '#5a6a8a',
+                secondaryColor: '#1a4d2e',
+                tertiaryColor: '#2d2d2d',
+                fontFamily: 'Inter, sans-serif'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>

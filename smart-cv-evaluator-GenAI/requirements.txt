@@ -1,0 +1,21 @@
+### Done with Python 3.11.0
+
+
+# Core
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+
+# LangChain
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-core>=0.1.0
+langsmith>=0.1.0
+deepeval>=0.6.5
+
+# UI
+streamlit>=1.30.0
+
+# Utilities
+python-dateutil>=2.8.2
+# pdfplumber>=0.10.0
+PyPDF2>=3.0.0

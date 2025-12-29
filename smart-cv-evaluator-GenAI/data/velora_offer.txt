@@ -1,0 +1,61 @@
+Hola! 👋
+
+
+🚀🚀¡¡¡WE ARE HIRING!!! 🚀🚀
+
+
+
+Si buscas un proyecto donde realmente puedas marcar la diferencia, en Velora te estamos esperando. 
+
+Estamos transformando la manera en que las empresas gestionan el talento, y queremos que seas parte de esta revolución. Como Generative AI Engineer, serás una pieza clave en este emocionante viaje!!
+ 
+🌍 ¿Por qué unirte a Velora?
+
+En Velora estamos escribiendo “El futuro del reclutamiento”.
+Con nuestra Suite de Gestión de Talento, contratar nunca fué tan fácil! 
+
+Un software con el que puedes gestionar todos los procesos de selección “end to end”, con capas y capas de automatización, gracias a la IA. Te lo mostramos en un video rápido:
+https://www.youtube.com/watch?v=IG1bkELJWCk
+
+
+Con nosotros, tendrás la oportunidad de contribuir directamente al crecimiento de Velora tanto en España como a nivel internacional! 
+
+
+
+Estamos buscando desarrollador Python con experiencia en proyectos IA Generativa con modelos LLM y Prompt Engineering que quiera incorporarse al equipo para hacer grandes cosas con nosotros. Nos dedicamos a la evaluación automática de candidatos y el desarrollo de chatbots y estamos aplicando LLM para mejorar estos procesos.
+
+
+Requisitos:
+
+Experiencia de al menos 4 años con Python
+Necesario tener experiencia profesional trabajando con modelos LLM (GPT4, Gemini o Claude) y creación de Prompts para tareas de sistema (no uso nivel usuario)
+Valorable experiencia con sistemas de IA complejos y uso de marcos como LangChain o LlamaIndex
+Es un plus si tiene experiencia realizando finetuning (reentrenamiento de modelos)
+Conocimientos en framewokrs Web como FastAPI, Flask o similar son puntos extras.
+Se valora capacidad para trabajar en equipo y aprender de manera proactiva.
+
+
+Responsabilidades:
+
+Colaborar en el desarrollo, mantenimiento y mejora de nuestros sistemas basados en IAGen.
+Participar en la resolución de problemas técnicos.
+Trabajar en estrecha colaboración con otros miembros del equipo para lograr objetivos comunes.
+
+
+Proyectos de IA:
+
+Sistema de Evaluación de candadidatos por IA (analisis de ofertas y CVs)
+Agentes conversacionales de texto para entrevistas a candidatos
+Agentes conversacionales de voz para entrevistas a candidatos
+Sistema de generación de informes, analisis y evaluaciones de candidatos
+En roadmap: Agente Copilot de ejecución de tareas autónomas.
+
+
+Beneficios:
+
+Horario flexible y teletrabajo 99%! (solo nos vemos en presencial 1 vez al mes y siempre hacemos algo divertido ese día)
+Un entorno de trabajo joven, dinámico y en crecimiento.
+Contrato indefinido y un salario acorde a la experiencia del candidato (el rango de la oferta se menciona en la primera entrevista).
+
+
+Ya sabes, si tienes ganas de aprender y formar parte de algo grande, inscribete!
