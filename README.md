@@ -15,7 +15,7 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 
 ## **Gen AI**:genie:
 
-### [Smart CV-Evaluator :robot: 📄 ](smart-cv-evaluator/)
+### [Smart CV-Evaluator :robot: 📄 ](smart-cv-evaluator-GenAI/)
 Aplicación a modo de chatbot que es capaz de evaluar el cv y habilidades de un candidato en base a unos requisitos de una oferta laboral. Termina dando un score del candidato. Proyecto demo sin archivos. Si se desea conocer las tripas de este proyecto contactarme por linkedin ya que esta en otro repo privado. Framework principal: LangChain y Streamlit para Frontend.
 - :eye:A destacar: Tracing de logs y evaluación con LangSmith y DeepEval respectivamente. 
 
