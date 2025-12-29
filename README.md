@@ -4,7 +4,7 @@ Bienvenido a mi portfolio! Estos son los ultimos proyectos en los que he estado 
 
 Estan estructurados en tres grandes ramas:
 
-- **GenAI**: RAG y Prompt Engineering
+- **GenAI**: RAG, Prompt Engineering, LLMs applications y Chatbots inteligentes
 - **Deep Learning**: Computer Vision
 - **Machine Learning**: Clasificación, Regresión y Clustering.
   
@@ -15,8 +15,13 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 
 ## **Gen AI**:genie:
 
+### [Smart CV-Evaluator :book: :chat: ](smart-cv-evaluator/)
+Aplicación a modo de chatbot que es capaz de evaluar el cv y habilidades de un candidato en base a unos requisitos de una oferta laboral. Termina dando un score del candidato. Proyecto demo sin archivos. Si se desea conocer las tripas de este proyecto contactarme por linkedin ya que esta en otro repo privado. Framework principal: LangChain
+- :eye:A destacar: Tracing de logs y evaluación con LangSmith y DeepEval respectivamente. 
+
+
 ### [RAG Medical Chatbot :genie: :medical_symbol: ](RAG_Chatbot/)
-Creacion de un chatbot capaz de buscar informacion médica técnica dentro de 2500 paginas de libros de texto medicos. Mediante el uso de un RAG, aumento la precisión y la robustez de las respuestas dadas por un LLM (Mistral 7B).
+Creacion de un chatbot capaz de buscar informacion médica técnica dentro de 2500 paginas de libros de texto medicos. Mediante el uso de un RAG, aumento la precisión y la robustez de las respuestas dadas por un LLM (Mistral 7B). Montado a través de Langchain
 - :eye:A destacar: La conclusión, te encantará.
 
 

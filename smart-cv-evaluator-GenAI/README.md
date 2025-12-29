@@ -2,7 +2,7 @@
 
 ## 📋 Descripción General
 
-**CV Evaluator** es un sistema basado en LLM (Large Language Models) que automatiza la evaluación de candidatos comparando sus CVs contra los requisitos de una oferta de trabajo. El sistema está construido con **LangChain** para la orquestación de LLMs, **LangSmith** para el tracking de ejecuciones, y **DeepEval** para la evaluación de calidad del sistema.
+**CV Evaluator** es un sistema basado en LLMs que automatiza la evaluación de candidatos comparando sus CVs contra los requisitos de una oferta de trabajo. El sistema está construido con **LangChain** para la orquestación de LLMs, **LangSmith** para el tracking de ejecuciones, y **DeepEval** para la evaluación de calidad del sistema.
 
 ![Frontend con Streamlit](data/frontend.png)
 
@@ -19,18 +19,16 @@ El sistema opera en **dos fases**:
    - **Obligatorios**: Requisitos mínimos/imprescindibles (palabras clave: "mínimo", "requerido", "necesario")
    - **Opcionales**: Requisitos deseables (palabras clave: "valorable", "deseable", "plus")
 
-2. **Matching CV-Requisitos**: Compara el CV del candidato contra cada requisito y los clasifica en:
-   - `matching_requirements`: Requisitos que el CV demuestra cumplir
-   - `unmatching_requirements`: Requisitos que el CV no cumple o contradice
-   - `to_verify`: Requisitos que podrían cumplirse pero requieren verificación
+2. **Matching CV-Requisitos**: Compara el CV del candidato contra cada requisito y los clasifica en requisitos cumplidos, no cumplidos y por determinar, los cuales el sistema preguntará al usuario por esa información faltante
+ 
 
 3. **Cálculo de Puntuación**:
    - Score = (requisitos cumplidos / total requisitos) × 100
-   - Si falla un requisito **obligatorio** → `discarded: true`, `score: 0`
+   - Si falla un requisito **obligatorio** → Candidato descartado y puntuación de 0
 
 ### Fase 2: Entrevista de Verificación
 
-Si el candidato no está descartado y tiene requisitos en `to_verify`:
+Si el candidato no está descartado y tiene requisitos por determinar:
 
 1. **Generación de Preguntas**: El sistema genera preguntas específicas para cada requisito pendiente
 2. **Procesamiento de Respuestas**: Interpreta las respuestas del candidato (confirmed/denied/unclear)
@@ -39,6 +37,8 @@ Si el candidato no está descartado y tiene requisitos en `to_verify`:
 ---
 
 ## 🏗️ Arquitectura del Sistema
+
+Si se desea entender mejor cómo se interrelacionan los distintos módulos del proyecto abrir architecture_diagram.html para ver una vision un poco más detallada y técnica del proyecto.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -84,6 +84,8 @@ Si el candidato no está descartado y tiene requisitos en `to_verify`:
 ---
 
 ## 📁 Estructura del Proyecto
+
+Estructura original del proyecto. Este repo no contiene toda la información. Toda los los scripts estan almacenados en un repo privado, contactarme si tienes curiosidad o dudas.
 
 ```
 cv-evaluator/
@@ -167,19 +169,9 @@ DeepEval evalúa la calidad del sistema usando métricas LLM-as-a-Judge (GEval).
 
 ![deepeval_detail](data/deepeval_detail.png)
 
-### Ejecución de Tests:
-```bash
-# Ejecutar toda las evaluaciones con identificador para tracking
-deepeval test run evaluation/ --identifier "input_id"
-
-```
-
-### Visualización:
-Los resultados se suben automáticamente a **Confident AI** para visualización en dashboard.
-
 ---
 
-## 📊 Formato de Salida (EvaluationResult)
+## 📊 Formato de Salida tras todo el flujo
 
 ```json
 {
@@ -196,34 +188,6 @@ Los resultados se suben automáticamente a **Confident AI** para visualización 
 ```
 
 ---
-
-## 🚀 Quick Start
-
-### 1. Instalación:
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Configurar .env con tus API keys
-
-### 3. Ejecutar la aplicación:
-```bash
-streamlit run streamlit_app/app.py
-```
-
-### 4. Ejecutar evaluación:
-```bash
-deepeval test run evaluation/
-```
-
----
-
-## 📈 Roadmap a futuro
-
-- [ ] API REST para integración en FastAPI y productivizar en algun Cloud
-
----
-
 ## 👥 Autores
 
 Alejandro Sánchez Silvestre - Dic 2025
