@@ -12,6 +12,14 @@ uvicorn
 joblib
 pydantic
 streamlit
+
+# busquedas web
+tavily-python==0.7.17
+
+# Observabilidad y evaluación
+langsmith>=0.1.0
+deepeval>=0.6.5
+
 #local
 ollama==0.6.1
 google-genai==1.53.0

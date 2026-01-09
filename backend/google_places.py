@@ -135,10 +135,14 @@ import requests
 import os
 from dotenv import load_dotenv
 
+from config.settings import load_config
+# ---------------- CARGA CONFIGURACIÓN ----------------
+config = load_config()
+
 # Carga las variables de entorno desde el .env
 load_dotenv(".env")
 # ---------------- API KEY ----------------
-GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
+GOOGLE_MAPS_API_KEY = config["GOOGLE_MAPS_API_KEY"]
 if not GOOGLE_MAPS_API_KEY:
     raise ValueError("Debes definir la variable de entorno GOOGLE_MAPS_API_KEY")
 

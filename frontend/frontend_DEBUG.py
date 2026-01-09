@@ -1,167 +1,280 @@
-# =================================================================
-# PARCHE PARA frontend.py - VERSIÓN CON DEBUGGING
-# =================================================================
-# 
-# INSTRUCCIONES:
-# 1. Abre tu archivo frontend.py
-# 2. Busca la línea que dice:
-#    # ==========================================
-#    # LÓGICA DE BÚSQUEDA
-#    # ==========================================
-#    if search_clicked:
-#
-# 3. REEMPLAZA desde "if search_clicked:" hasta "st.rerun()"
-#    (líneas 357-413 aproximadamente) con el código de abajo
-# =================================================================
+"""
+FoodLooker - Frontend con Chat Conversacional (v2.1)
+Diseñado para interactuar con el agente de reservas híbrido via FastAPI
+"""
+import sys
+from pathlib import Path
+
+root_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(root_dir))
+
+import streamlit as st
+from typing import Dict, List, Any, Optional
+import base64
+from datetime import datetime, time as dt_time
+
+from frontend_api_helpers import (
+    search_restaurants_via_agent,
+    process_agent_response_for_ui,
+    continue_agent_conversation
+)
 
 # ==========================================
-# LÓGICA DE BÚSQUEDA (VERSIÓN CON DEBUGGING)
+# CONFIGURACIÓN
 # ==========================================
-if search_clicked:
-    st.write("🔍 **DEBUG:** Botón de búsqueda clickeado")  # DEBUG 1
+API_BASE_URL = "http://localhost:8000"
+API_KEY = "demo-api-key"
+
+st.set_page_config(
+    layout="wide", 
+    page_title="FoodLooker", 
+    page_icon="🍽️",
+    initial_sidebar_state="collapsed"
+)
+
+# ==========================================
+# COLORES Y CSS (Se mantiene tu diseño original)
+# ==========================================
+COLOR_BG = "#F9F4E6"
+COLOR_PRIMARY = "#E07A5F"
+COLOR_PRIMARY_DARK = "#D66A4F"
+COLOR_TEXT_DARK = "#3D3D3D"
+
+def get_base64_image(image_path):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except FileNotFoundError:
+        return None
+
+logo_b64 = get_base64_image("logo.jpeg")
+
+st.markdown(f"""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    html, body, [class*="css"] {{ font-family: 'Poppins', sans-serif; }}
+    .stApp {{ background-color: {COLOR_BG}; }}
+    .header-box {{
+        background-color: {COLOR_PRIMARY};
+        padding: 12px 25px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }}
+    .header-title {{ color: white; font-size: 2.2rem; font-weight: 700; margin: 0; }}
+    .header-logo {{ width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid white; }}
+    div.stButton > button {{
+        background-color: {COLOR_PRIMARY} !important;
+        color: white !important;
+        border-radius: 25px !important;
+        border: none !important;
+        padding: 10px 25px !important;
+        font-weight: 600 !important;
+    }}
+    .restaurant-card {{ background-color: #EFEDE6; padding: 15px 18px; border-radius: 12px; margin-bottom: 10px; }}
+    .card-name {{ font-size: 1.1rem; font-weight: 700; color: #5A4A42; }}
+    .card-info {{ color: #666; font-size: 0.9rem; margin-top: 5px; }}
+</style>
+""", unsafe_allow_html=True)
+
+
+# ==========================================
+# INICIALIZACIÓN DEL ESTADO
+# ==========================================
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
+
+if 'agent_session_id' not in st.session_state:
+    st.session_state.agent_session_id = None
+
+if 'restaurants' not in st.session_state:
+    st.session_state.restaurants = []
+
+if 'show_results' not in st.session_state:
+    st.session_state.show_results = False
+
+if 'preferences' not in st.session_state:
+    st.session_state.preferences = {
+        'filters_enabled': False, # Flag para saber si aplicar o no los filtros
+        'location': '',
+        'party_size': 2,
+        'use_specific_time': False,
+        'selected_date': datetime.now(),
+        'selected_time': dt_time(21, 0),
+        'mins_to_wait': 45,
+        'travel_mode': 'walking',
+        'max_distance': 15.0,
+        'price_level': 2,
+        'extras': ''
+    }
+
+
+# ==========================================
+# FUNCIONES DE LÓGICA
+# ==========================================
+def add_message(role: str, content: str):
+    st.session_state.messages.append({
+        'role': role,
+        'content': content,
+        'timestamp': datetime.now().strftime('%H:%M')
+    })
+
+def clear_chat():
+    st.session_state.messages = []
+    st.session_state.agent_session_id = None
+    st.session_state.restaurants = []
+    st.session_state.show_results = False
+
+def process_user_input(user_input: str):
+    if not user_input.strip():
+        return
     
-    if not query and not location:
-        st.warning("⚠️ Por favor, completa al menos el campo de búsqueda o ubicación")
-        st.write("⚠️ **DEBUG:** Query y location están vacíos")  # DEBUG 2
+    add_message('user', user_input)
+    prefs = st.session_state.preferences
+    conversation_history = st.session_state.messages[:-1] if len(st.session_state.messages) > 1 else []
+    
+    # Lógica de filtrado dinámico:
+    # Si 'filters_enabled' es False, enviamos None para que el Agente use el texto del chat.
+    if not prefs['filters_enabled']:
+        response = search_restaurants_via_agent(
+            user_query=user_input,
+            conversation_history=conversation_history,
+            session_id=st.session_state.agent_session_id,
+            location=None, party_size=None, selected_date=None, 
+            selected_time=None, mins=None, travel_mode=None, 
+            max_distance=None, price_level=None, extras=None
+        )
     else:
-        st.write(f"✅ **DEBUG:** Query = '{query}'")  # DEBUG 3
-        st.write(f"✅ **DEBUG:** Location = '{location if location else '(vacío - usará default)'}'")  # DEBUG 4
+        # Si están habilitados, preparamos los datos del formulario
+        selected_date = prefs['selected_date'] if prefs['use_specific_time'] else None
+        selected_time = prefs['selected_time'] if prefs['use_specific_time'] else None
+        mins = prefs['mins_to_wait'] if not prefs['use_specific_time'] else None
         
-        try:
-            with st.spinner("Buscando restaurantes..."):
-                st.write("🔄 **DEBUG:** Entrando al spinner...")  # DEBUG 5
+        response = search_restaurants_via_agent(
+            user_query=user_input,
+            location=prefs['location'],
+            party_size=prefs['party_size'],
+            selected_date=selected_date,
+            selected_time=selected_time,
+            mins=mins,
+            travel_mode=prefs['travel_mode'],
+            max_distance=prefs['max_distance'],
+            price_level=prefs['price_level'],
+            extras=prefs['extras'],
+            conversation_history=conversation_history,
+            session_id=st.session_state.agent_session_id
+        )
+    
+    handle_agent_response(response)
 
-                # PREPARACIÓN CORRECTA DE FECHAS
-                date_str = ""
-                time_str = ""
-                
-                if st.session_state.selected_date:
-                    date_str = st.session_state.selected_date.strftime("%Y-%m-%d")
-                
-                if st.session_state.selected_time:
-                    time_str = st.session_state.selected_time.strftime("%H:%M")
+def handle_agent_response(response: Dict[str, Any]):
+    status = response.get('status', 'failed')
+    if status == 'success':
+        st.session_state.agent_session_id = response.get('session_id')
+        restaurants = process_agent_response_for_ui(response)
+        if restaurants:
+            st.session_state.restaurants = restaurants
+            st.session_state.show_results = True
+            add_message('agent', response.get('message', '¡He encontrado estos restaurantes!'))
+        else:
+            add_message('agent', response.get('message', 'No encontré nada con esos criterios.'))
+    elif status == 'needs_input':
+        st.session_state.agent_session_id = response.get('session_id')
+        add_message('agent', response.get('question', '¿Puedes darme más detalles?'))
+    else:
+        add_message('agent', f"⚠️ {response.get('message', 'Error en la solicitud.')}")
 
-                # Creamos diccionario con todos los inputs obtenidos
-                llm_inputs = {
-                    "query": query,
-                    "location": location,
-                    "max_distance": max_distance,
-                    "mins": mins,
-                    "travel_mode": travel_mode,
-                    "price": price_options.get(price, 2),
-                    "col_date": date_str,
-                    "col_time": time_str,
-                    "extras": [e.strip().lower() for e in extra_input.split(",")] if extra_input else []
-                }
-                
-                st.write("📦 **DEBUG:** Inputs preparados para el LLM:")  # DEBUG 6
-                st.json(llm_inputs)  # Mostrar los inputs
 
-                # Llamada al LLM
-                st.write("🤖 **DEBUG:** Llamando al LLM (Gemini)...")  # DEBUG 7
-                llm_response = call_llm(
-                    prompt_variables=llm_inputs,
-                    parse_json=True
-                )
-                
-                st.write("✅ **DEBUG:** LLM respondió. Tipo de respuesta:", type(llm_response))  # DEBUG 8
-                st.write("📄 **DEBUG:** Respuesta del LLM:")  # DEBUG 9
-                st.json(llm_response)  # Mostrar la respuesta
-                
-                # Validar respuesta del LLM
-                if not llm_response or not isinstance(llm_response, dict):
-                    st.error("❌ **ERROR:** El LLM no devolvió un diccionario válido")
-                    st.write(f"Tipo recibido: {type(llm_response)}")
-                    st.write(f"Valor: {llm_response}")
-                    st.stop()
+# ==========================================
+# UI - HEADER
+# ==========================================
+img_html = f'<img src="data:image/jpeg;base64,{logo_b64}" class="header-logo">' if logo_b64 else '🍽️'
+st.markdown(f'<div class="header-box">{img_html}<h1 class="header-title">FoodLooker</h1></div>', unsafe_allow_html=True)
 
-                # Respuesta a api de Google Places
-                st.write("📍 **DEBUG:** Creando payload para Google Places...")  # DEBUG 10
-                google_places_payload = PlaceSearchPayload(**llm_response)
-                
-                st.write("📍 **DEBUG:** Payload creado. Buscando en Google Places...")  # DEBUG 11
-                st.json(google_places_payload.dict())  # Mostrar el payload
-                
-                resultados = places_text_search(google_places_payload)
-                
-                st.write(f"📊 **DEBUG:** Búsqueda completada. Resultados encontrados: {len(resultados)}")  # DEBUG 12
-                
-                # Validar que hay resultados
-                if not resultados:
-                    st.warning("⚠️ No se encontraron restaurantes con esos criterios")
-                    st.info("""
-                    💡 **Sugerencias:**
-                    - Amplía la distancia máxima
-                    - Prueba con otro tipo de cocina
-                    - Verifica que la ubicación sea correcta
-                    - Simplifica la búsqueda (ej: solo "restaurante japonés")
-                    """)
-                    st.stop()
-                
-                # Procesamos resultados para la UI filtrando los primeros 3 resultados
-                st.write("🔧 **DEBUG:** Procesando resultados para la UI...")  # DEBUG 13
-                processed = []
-                for i, p in enumerate(resultados):
-                    processed.append({
-                        "id": i + 1,
-                        "name": p.get("name", "Sin nombre"),
-                        "area": p.get("neighborhood", "Zona no disponible"),
-                        "price": p.get("price_level", "N/A"),
-                        "rating": p.get("rating", "N/A")
-                    })
-                    if i >= 2:
-                        break  # Solo los primeros 3
 
-                st.write(f"✅ **DEBUG:** Procesados {len(processed)} restaurantes")  # DEBUG 14
-                st.write("🎯 **DEBUG:** Guardando resultados y cambiando a pantalla 2...")  # DEBUG 15
-                
-                st.session_state.results = processed
-                st.session_state.step = 2
+# ==========================================
+# LAYOUT PRINCIPAL
+# ==========================================
+col_chat, col_options = st.columns([2, 1])
+
+with col_chat:
+    chat_container = st.container(height=500)
+    with chat_container:
+        if not st.session_state.messages:
+            st.markdown('<div style="background-color:#E07A5F;color:white;padding:15px;border-radius:12px;">¡Hola! Soy tu asistente de reservas 👋 Cuéntame qué buscas...</div>', unsafe_allow_html=True)
+        
+        for msg in st.session_state.messages:
+            align = "flex-end" if msg['role'] == 'user' else "flex-start"
+            bg = "#E8E4DD" if msg['role'] == 'user' else "#E07A5F"
+            color = "#3D3D3D" if msg['role'] == 'user' else "white"
+            st.markdown(f"""
+                <div style="display: flex; justify-content: {align}; margin-bottom: 10px;">
+                    <div style="background:{bg}; color:{color}; padding:10px 15px; border-radius:15px; max-width:80%;">
+                        {msg['content']}
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
+
+    with st.form(key="chat_form", clear_on_submit=True):
+        c1, c2 = st.columns([5, 1])
+        user_input = c1.text_input("Msg", placeholder="Busco un italiano...", label_visibility="collapsed")
+        if c2.form_submit_button("Enviar") and user_input:
+            process_user_input(user_input)
+            st.rerun()
+
+with col_options:
+    if st.session_state.show_results and st.session_state.restaurants:
+        st.markdown("### 🏆 Top Restaurantes")
+        for idx, res in enumerate(st.session_state.restaurants):
+            st.markdown(f"""<div class="restaurant-card"><div class="card-name">{res.get('name')}</div>
+                <div class="card-info">📍 {res.get('area')} • ⭐ {res.get('rating')}</div></div>""", unsafe_allow_html=True)
+            if st.button(f"Reservar en {res.get('name')[:15]}...", key=f"res_{idx}"):
+                add_message('user', f"Reservar en {res.get('name')}")
                 st.rerun()
-                
-        except KeyError as e:
-            st.error(f"❌ **ERROR DE CONFIGURACIÓN:** Falta el campo {str(e)}")
-            st.info("El LLM no está devolviendo todos los campos necesarios")
-            with st.expander("🐛 Ver respuesta del LLM que causó el error"):
-                st.write(llm_response if 'llm_response' in locals() else "No disponible")
-                
-        except Exception as e:
-            st.error(f"❌ **ERROR INESPERADO:** {str(e)}")
-            with st.expander("🐛 Ver detalles técnicos del error"):
-                import traceback
-                st.code(traceback.format_exc())
-            
-            st.info("""
-            📝 **Si ves este error, comparte:**
-            1. El mensaje de error completo (copia el texto de arriba)
-            2. Los valores de DEBUG que viste antes del error
-            3. Esto me ayudará a identificar exactamente dónde falla
-            """)
+        st.divider()
 
+    # --- SECCIÓN DE FILTROS ---
+    with st.expander("⚙️ Opciones avanzadas", expanded=False):
+        # El interruptor que determina si se usan estos valores
+        enabled = st.toggle("Aplicar estos filtros", value=st.session_state.preferences['filters_enabled'])
+        st.session_state.preferences['filters_enabled'] = enabled
+        
+        # Variable para deshabilitar visualmente los inputs si el toggle está apagado
+        dis = not enabled
+        
+        st.markdown("**📍 Ubicación**")
+        st.session_state.preferences['location'] = st.text_input("L", value=st.session_state.preferences['location'], label_visibility="collapsed", disabled=dis, key="f_loc")
+        
+        st.markdown("**👥 Personas**")
+        st.session_state.preferences['party_size'] = st.number_input("P", 1, 20, st.session_state.preferences['party_size'], disabled=dis, key="f_party")
+        
+        st.markdown("**🕒 ¿Cuándo?**")
+        use_spec = st.checkbox("Fecha específica", value=st.session_state.preferences['use_specific_time'], disabled=dis)
+        st.session_state.preferences['use_specific_time'] = use_spec
+        
+        if use_spec:
+            st.session_state.preferences['selected_date'] = st.date_input("D", value=st.session_state.preferences['selected_date'], disabled=dis)
+            st.session_state.preferences['selected_time'] = st.time_input("T", value=st.session_state.preferences['selected_time'], disabled=dis)
+        else:
+            st.session_state.preferences['mins_to_wait'] = st.slider("Minutos de espera", 10, 120, st.session_state.preferences['mins_to_wait'], disabled=dis)
 
-# =================================================================
-# FIN DEL PARCHE
-# =================================================================
-# 
-# DESPUÉS DE APLICAR ESTE PARCHE:
-# 
-# 1. Ejecuta: streamlit run frontend.py
-# 
-# 2. Haz una búsqueda simple: "restaurante japonés"
-# 
-# 3. Observa los mensajes de DEBUG que aparecen:
-#    - Si ves DEBUG 1-5 pero NO el 6: El problema está en la preparación de inputs
-#    - Si ves hasta DEBUG 7 pero NO el 8: El problema está en el LLM
-#    - Si ves hasta DEBUG 11 pero NO el 12: El problema está en Google Places
-#    - Si ves hasta DEBUG 14 pero NO el 15: El problema está al cambiar de pantalla
-# 
-# 4. IMPORTANTE: Comparte conmigo:
-#    - Hasta qué número de DEBUG llegaste
-#    - Qué mensaje de ERROR viste (si apareció alguno)
-#    - El contenido de los JSON que se mostraron
-# 
-# =================================================================
+        st.markdown("**🚶 Transporte**")
+        t_modes = {"Caminando": "walking", "Bus/Metro": "transit", "Coche": "driving"}
+        mode_label = st.selectbox("M", list(t_modes.keys()), disabled=dis)
+        st.session_state.preferences['travel_mode'] = t_modes[mode_label]
 
-# NOTA SOBRE MODO PRODUCCIÓN:
-# Una vez identificado el problema, puedes eliminar todos los
-# st.write() que empiezan con "DEBUG" para tener una versión limpia.
+        st.markdown("**💰 Precio máximo**")
+        p_levels = {"€": 1, "€€": 2, "€€€": 3, "€€€€": 4}
+        p_label = st.select_slider("Pr", options=list(p_levels.keys()), value="€€", disabled=dis)
+        st.session_state.preferences['price_level'] = p_levels[p_label]
+
+        st.markdown("**✨ Extras**")
+        st.session_state.preferences['extras'] = st.text_input("E", placeholder="Terraza, vegano...", disabled=dis)
+
+    if st.button("🔄 Nueva conversación", use_container_width=True):
+        clear_chat()
+        st.rerun()
