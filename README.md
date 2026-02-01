@@ -15,6 +15,10 @@ Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejand
 
 ## **Gen AI**:genie:
 
+### [AI Agent - Restaurant Booking 🤖 🍔 🍴](AI_Agent_Restaurant_booking/)
+Proyecto del TFM del Master de IA Generativa consistiendo en un Agente de IA con acceso a herramientas avanzadas (Google Maps, Calendario, Llamadas telefónicas...) orientado a la búsqueda y reservas de restaurantes. Con una simple frase como ''Reservame una mesa para 3 en X restaurante para mañana a las 21h'' es capaz de gestionar la reserva sin un solo clic.
+- :eye:A destacar: Herramienta de llamadas por voz sintética a través de Twilio y ElevenLabs y Estructura modular orientada a añadir nuevas funcionalidades (Reserva vuelos, hoteles...). 
+
 ### [Smart CV-Evaluator :robot: 📄 ](smart-cv-evaluator-GenAI/)
 Aplicación a modo de chatbot que es capaz de evaluar el cv y habilidades de un candidato en base a unos requisitos de una oferta laboral. Termina dando un score del candidato. Proyecto demo sin archivos. Si se desea conocer las tripas de este proyecto contactarme por linkedin ya que esta en otro repo privado. Framework principal: LangChain y Streamlit para Frontend.
 - :eye:A destacar: Tracing de logs y evaluación con LangSmith y DeepEval respectivamente. 
@@ -49,7 +53,7 @@ Se trata de un modelo clasificador binario que prediga si un determinado ordenad
 - :eye:A destacar: forma de lidiar con el gran numero de features y variabilidad en cada feature de cara al modelado.
 
 ### [Time Series Analysis (Prophet) :chart_with_upwards_trend: :convenience_store:](time_series_prophet_store/)
-Se trata de la creacion y optimizacion de un modelo de previsión de ventas utilizando Prophet de Meta, centrandose especialmente en el modelaje y optimización del modelo.
+Parte del proyecto del TFM de Master de Data Science. Se trata de la creacion y optimizacion de un modelo de previsión de ventas utilizando Prophet de Meta, centrandose especialmente en el modelaje y optimización del modelo.
 - :eye:A destacar: Hiperparametrizacion y ajuste fino del modelo. Inclusion de eventos clave y vacaciones y regresores adicionales.
 
 
