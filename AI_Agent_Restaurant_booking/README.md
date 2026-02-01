@@ -1,87 +1,93 @@
 # 🍽️ FoodLooker
 
-Agente Inteligente de reservas con IA
-Trabajo final de Máster
+**AI-Powered Restaurant Reservation Agent**
+
+An intelligent agent that searches, filters, and books restaurants autonomously — so you don't have to lift a finger.
+
+> 🎓 Master's Thesis Project | Master in Engineering of Generative AI Solutions @ EBIS Business Techschool | Grade: 10/10
+DEMO Video:
+[![Demo](https://img.shields.io/badge/Demo-YouTube-red?logo=youtube)](https://www.youtube.com/watch?v=v7iGPF_20dk)
 
 ---
 
-## Ejecución del proyecto
+## 🎯 The Problem
 
-## Pasos previos
+Traditional reservation flows are fragmented: you search on Google, check availability on another app, call if there's no online booking, and manually add it to your calendar. Most LLM-based solutions are linear and brittle — they break when facing uncertainty or unavailability.
 
-⚠️**IMPORTANTE**: Primero crea un archivo `.env` con tus API keys (usa `.env.example` como plantilla).
+## 💡 The Solution
 
-**Instrucciones para generar las credenciales de Google Calendar**
+FoodLooker is not a chatbot. It's an **autonomous agent** capable of reasoning, adapting, and executing across multiple modalities to guarantee the reservation gets done.
 
-1.  Crea un proyecto nuevo en https://console.cloud.google.com/
-2.  Habilita la API: Ve a "APIs y servicios" > "Biblioteca", busca "Google Calendar API" y habilítala.
-3.  Pantalla de Consentimiento OAuth:
-    1. Ve a "APIs y servicios" > "Pantalla de consentimiento de OAuth".
-    2. Selecciona el tipo de usuario (interno o externo).
-    3. Configura el nombre de la aplicación, y la información de contacto.
-    4. Dale permisos completos, la aplicación configurará luego los SCOPES
-4.  Crea Credenciales OAuth:
-    1. Ve a "APIs y servicios" > "Credenciales" > "Crear credenciales" > "ID de cliente OAuth".
-    2. Elige el tipo de aplicación: Web application
-    3. Añade las URIs de redireccionamiento autorizadas (donde Google devolverá el código de autorización):
-       - http://localhost/8080/
-       - http://127.0.0.1/8080/
-    4. Guarda el ID de cliente y el Secreto de cliente ("credentials.json) que se generan, son cruciales para tu aplicación.
-    5. Coloca el fichero credentials.json en el directorio raiz de tu proyecto
-5.  Ve a Google Auth Platform -> Público -> Haz scroll down hasta "Usuarios de prueba"
-    1.  Añade tu cuenta de google: xxxx@gmail.com que estés utilizando para correr la aplicación
+With a simple phrase like:
 
-**Instrucciones para habilitar Google Places API**
+> *"Book me a table at X restaurant for dinner at 9pm for 3 people"*
 
-1. Ve a google maps platform https://console.cloud.google.com/google/maps-apis/overview
-   1. Asegúrate que utilizas el mismo proyecto en que habilitaste google calendar API
-   2. La primera vez te pedirá crear un clave de api, esa es la variable de entorno GOOGLE_MAPS_API_KEY
-      - Debes implementar una restricción por IP, y agregar tu IP pública
-      - Debes implementar una restricción de API para las siguientes APIs:
-        - Distance Matrix API
-        - Geocoding API
-        - Places API (New)
-   3. Puedes revisar, o rehacer tus credenciales en APIs y Servicios -> Credenciales -> Nueva Clave de API
-2. En APIs y Servicios -> Biblioteca habilita las siguientes APIs
-   - Geocoding API (necesaria para convertir direcciones a coordenadas)
-   - Places API (New) o Places API (para búsqueda de lugares)
-   - Distance Matrix API (para filtrado por tiempo de viaje)
+![Frontend](images/frontend.png)
+
+The agent will:
+1. Search the restaurant on Google Maps
+2. Verify availability via API
+3. If no API exists → **make a real phone call** with a human-like synthetic voice
+4. Confirm and add the reservation to your personal calendar
+
 
 ---
 
-### 💻 Ejecución desde bash (Ejecución completa con todas las APIs de terceros y streamlit)
+## 🏗️ Architecture
 
-```bash
-python main.py
-```
+The system implements a **ReAct (Reason + Act) cognitive loop**, allowing the agent to think before acting, observe results, and adapt its strategy dynamically.
 
-Para debugear por separado cada elemento:
+![AI Agent Architecture](images/AI_Agent_Arch.png)
 
-1. **Agente en terminal**: `python agent/main.py` → Ejecutará el agente en terminal, podrás interactuar con el y ver el proceso de razonamiento
-2. **FastAPI en terminal**: `python .\FastAPI\api_server.py`
-3. **Lanzar el Frontend**: `streamlit run frontend/frontend.py`
+**Core Components**
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Frontend** | Streamlit | User interaction interface |
+| **API REST** | FastAPI | Conection between frontend and backend |
+| **Backend** | LangChain + LangGraph | LLM integration and Agent Orchestration as a dynamic state graph |
+| **Tools** | Tavily Web Search, Google Places, Twilio + ElevenLabs, Google Calendar | Perception and execution |
+| **Observability and Evaluation** | LangSmith, DeepEval | Tracing and evaluation |
+
+
+## 🔧 AI Agent Tools
+
+The agent is equipped with a set of specialized tools that enable perception, action, and integration with external services:
+
+| Tool | Description |
+|------|-------------|
+| **Tavily Web Search** | Performs real-time web searches to gather information about restaurants, reviews, and general context |
+| **Google Places API** | Searches and retrieves detailed restaurant data: location, ratings, opening hours, contact information |
+| **Twilio + ElevenLabs** | Multimodal fallback system. ElevenLabs generates hyper-realistic synthetic voice; Twilio handles real-time phone calls to restaurants without digital booking systems |
+| **Google Calendar API** | Automatically creates calendar events once a reservation is confirmed |
+| **Mock CoverManager** | Simulated the booking process througth API Services of Covermanager |
+
+
+
+
+## 📊 Observability & Evaluation (LLMOps)
+
+### Tracing with LangSmith
+
+Full visibility into the agent's reasoning: every thought, action, tool call, and response.
+
+![Traces](images/langsmith_traces.png)
+
+
+### Evaluation with DeepEval
+
+The project includes an evaluation system based in LLM-as-a-judge using [DeepEval](https://deepeval.com/) powered by Confident AI.
+
+| Metric | Description |
+|--------|-------------|
+| **Tool Correctness** | Is the AI Agent selecting and using the appropriate tool for each step? |
+| **Task Completion** | Does the agent successfully complete the user's requested task? |
+| **Response Quality** | Are the responses clear, complete, and helpful? |
+
+![Evaluation](images/evaluation.png)
 
 ---
 
-### 🐋 Ejecución Rápida con Docker (No carga streamlit ni Google Calendar)
-
-Dos Comandos - Listo para usar
-
-```bash
-# 1. Construir la imagen
-docker build -t foodlooker .
-
-# 2. Ejecutar el contenedor
-docker run -p 8000:8000 -p 8501:8501 --env-file .env foodlooker
-```
-
-Acceso a la Aplicación
-
-- 🖥️ **Frontend**: http://localhost:8501
-- 📡 **Backend API**: http://localhost:8000
-- 📖 **Documentación API**: http://localhost:8000/docs
-
----
 
 ## 📁 Project Structure
 
@@ -151,106 +157,18 @@ genai-tfm/
 
 ---
 
-## 🧪 Testing
+## 🚀 Roadmap
 
-El proyecto incluye tests automatizados con pytest. Los resultados se generan en `test_results/` (configurado en `.coveragerc` y `pytest.ini`).
+This MVP is the foundation. Future directions include:
 
-```bash
-# Instalar dependencias de testing
-pip install -r requirements.txt
+- [ ] **Long-term memory (RAG)**: Vector database to persist user preferences across sessions
+- [ ] **Flight & hotel booking**: Expand to travel reservations
+- [ ] **General errands**: "Find me a dentist appointment next week"
+- [ ] **Multi-language voice**: Support for calls in different languages
+- [ ] **WhatsApp integration**: Alternative channel for confirmations
 
-# Ejecutar todos los tests
-pytest
+## 📄 License
 
-# Ejecutar solo tests unitarios
-pytest tests/unit/
+This repository showcases the project structure and documentation. Source code is not publicly available.
 
-# Ejecutar solo tests de integración
-pytest tests/integration/
-
-# Ejecutar con cobertura de código (resultados en test_results/htmlcov/)
-pytest --cov
-
-# Ejecutar un archivo específico con verbose
-pytest tests/unit/test_agent_graph.py -v
-
-# Generar reporte JUnit XML (para CI/CD)
-pytest --junitxml=test_results/junit.xml
-```
-
-Los resultados se guardan en:
-
-- `test_results/htmlcov/` - Reporte HTML de cobertura
-- `test_results/.coverage` - Datos de cobertura
-- `test_results/junit.xml` - Reporte JUnit (opcional)
-
----
-
-## 📊 Evaluación del Agente (DeepEval)
-
-El proyecto incluye un sistema de evaluación de calidad del agente usando [DeepEval](https://deepeval.com/) de Confident AI.
-
-### Métricas implementadas
-
-| Métrica              | Descripción                                                |
-| -------------------- | ---------------------------------------------------------- |
-| **Tool Correctness** | ¿El agente usa las herramientas correctas para cada tarea? |
-| **Task Completion**  | ¿El agente completa exitosamente la tarea del usuario?     |
-| **Response Quality** | ¿Las respuestas son claras, completas y útiles?            |
-
-### Ejecutar evaluaciones
-
-Las evaluaciones siempre ejecutan el agente real contra los casos de prueba definidos en `evals/datasets.py`.
-
-```bash
-# Ejecutar todas las evaluaciones
-python evals/run_evals.py
-
-# Ejecutar solo evaluaciones de búsqueda
-python evals/run_evals.py --category search
-
-# Ejecutar solo localmente (sin enviar a Confident AI)
-python evals/run_evals.py --local
-
-# Ejecutar en modo silencioso
-python evals/run_evals.py --quiet
-
-# Guardar resultados en archivo específico
-python evals/run_evals.py --output results/mi_evaluacion.json
-```
-
-### Servicios automáticos
-
-El sistema de evaluación arranca automáticamente los servicios necesarios:
-
-- **Servicio de llamadas**: Se inicia automáticamente cuando se ejecutan tests de la categoría `phone_call`
-- El servicio se detiene al finalizar las evaluaciones
-
-### Categorías de evaluación
-
-- `search` - Búsqueda de restaurantes
-- `missing_info` - Falta información para reservar
-- `booking` - Flujo completo de reservas
-- `phone_call` - Llamadas telefónicas (requiere Twilio configurado)
-- `calendar` - Eventos de calendario
-- `web_search` - Búsquedas web
-- `multi_turn` - Conversaciones multi-turno
-- `edge_case` - Casos especiales (saludos, preguntas fuera de dominio)
-
-### Integración con Confident AI
-
-Para ver los resultados en el dashboard de Confident AI:
-
-1. Configura `CONFIDENT_API_KEY` en tu archivo `.env`
-2. Ejecuta las evaluaciones:
-
-```bash
-# Login (una sola vez)
-deepeval login
-
-# Ejecutar evaluaciones con tracking automático
-python evals/run_evals.py
-```
-
-Los resultados se guardan localmente en `evals/results/` y se envían automáticamente al dashboard de Confident AI si está configurado.
 
