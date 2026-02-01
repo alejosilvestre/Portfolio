@@ -71,7 +71,7 @@ The agent is equipped with a set of specialized tools that enable perception, ac
 
 Full visibility into the agent's reasoning: every thought, action, tool call, and response.
 
-![Traces](images/langsmith_traces.png)
+![Traces](images/langsmith_dashboard.png)
 
 
 ### Evaluation with DeepEval
