@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-01-19T21:31:59.469463",
+  "total_cases": 14,
+  "use_mock": false,
+  "metrics_used": [
+    "ToolCorrectnessMetric",
+    "GEval",
+    "GEval"
+  ]
+}
