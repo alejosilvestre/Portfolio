@@ -1,0 +1,21 @@
+[run]
+data_file = test_results/.coverage
+branch = True
+source =
+    agent
+    backend
+    FastAPI
+
+[html]
+directory = test_results/htmlcov
+
+[xml]
+output = test_results/coverage.xml
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:

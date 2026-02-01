@@ -1,0 +1,48 @@
+# json
+dotenv
+openai
+langchain
+langchain-openai
+
+
+# Alejandro Python 3.11.0
+pandas
+fastapi
+uvicorn
+joblib
+pydantic
+streamlit
+
+# busquedas web
+tavily-python==0.7.17
+
+# Observabilidad y evaluación
+langsmith>=0.1.0
+deepeval>=0.6.5
+
+#local
+ollama==0.6.1
+google-genai==1.53.0
+
+# Twilio call
+twilio==9.9.1
+python-dotenv
+pyngrok==7.5.0
+flask==3.1.2
+flask-sock==0.7.0
+elevenlabs==2.29.0
+websockets
+
+# Calendar
+langchain-google-community==3.0.4
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+
+# Testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.10.0
+pytest-cov>=4.0.0
+httpx>=0.24.0
+
