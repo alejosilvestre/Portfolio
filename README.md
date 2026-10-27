@@ -4,6 +4,7 @@ Bienvenido a mi portfolio! Estos son los ultimos proyectos en los que he estado 
 
 Estan estructurados en tres grandes ramas:
 
+- **Product**: diseño y productivización de una solución end-to-end
 - **GenAI**: RAG, Prompt Engineering, LLMs applications y Chatbots inteligentes
 - **Deep Learning**: Computer Vision
 - **Machine Learning**: Clasificación, Regresión y Clustering.
@@ -11,6 +12,12 @@ Estan estructurados en tres grandes ramas:
 Dependiendo de cada proyecto le dedico mas o menos tiempo a un **análisis de datos** profundo 📊.
 
 Podrás encontrarme igualmente en [Linkedin](https://www.linkedin.com/in/alejandro-sanchez-silvestre/)
+
+## **Product**:iphone:
+
+### [Surf Radar: product e2e + deployment :ocean: :surfing_man: ](Surf_radar_e2e_product/)
+Proyecto propio desarrollado para atender un capricho personal, el surfing. Evolucionó hacia un producto final con idea de desarrollo final en app. Actualmente en fase beta de desarrollo en user testing.
+- :eye:A destacar: Proyecto que toca muchos palos, desde la resolución de un problema de negocio complejo y profundo (metereología y surfing) hasta la arquitectura y modelo de datos acorde para resolver este reto. 
 
 
 ## **Gen AI**:genie:
