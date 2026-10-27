@@ -31,7 +31,7 @@ Not another forecast dashboard. A **decision tool**.
 
 ### Demo
 
-[![Watch the demo](https://img.youtube.com/vi/xO0LUoy_KxQ/maxresdefault.jpg)](https://youtu.be/xO0LUoy_KxQ)
+[Watch the demo](https://youtu.be/xO0LUoy_KxQ)
 
 *A walkthrough on a phone:*
 
@@ -79,7 +79,7 @@ The result was a study of the 1,900 km between Moliets-et-Maâ and Tarifa, split
 **18 meteorologically homogeneous sections**, each bounded by a cape or river mouth where
 the wave or wind regime genuinely changes.
 
-📄 **[Full coastal segmentation study (PDF)](docs/secciones-costa-atlantica.pdf)** — section
+📄 **[Full coastal segmentation study (PDF)](secciones-costa-atlantica.pdf)** — section
 by section, with swell windows, seasonal wind regimes, local phenomena and boundary
 coordinates.
 
