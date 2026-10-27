@@ -33,7 +33,7 @@ Creacion de un chatbot capaz de buscar informacion médica técnica dentro de 25
 ## **Deep Learning**:brain:
 
 ### [Deep Learning - Medical Image Classificator :brain: :eyeglasses:](Deep_learning_Medical_image_Classificator/)
-Creacion de un modelo de clasificacion de imagen medica multietiqueta (14 clases distintas). Utilizacion de Transfer learning para implementar arquitectura de DenseNet121.
+Fine-tuning por medio de Transfer Learning con DenseNet121 como arquitectura para un modelo de clasificacion de imagen medica multietiqueta (14 clases distintas).
 - :eye:A destacar: el tamaño de los datos (40Gb) y la implementación de Grad-CAM para la interpretacion de las predicciones del modelo.
 
 
